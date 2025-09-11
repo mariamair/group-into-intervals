@@ -26,9 +26,9 @@ const descendingData = dataService.sortDataDescending(numbers)
 
 // Add color from selected scheme to each interval
 
-// Return data as interval with color scheme
+// Return data as intervals with color scheme
 console.log('original data input: ' + numbers)
 console.log('data sorted ascending: ' + ascendingData)
 console.log('data sorted descending: ' + descendingData)
-console.log('intervals: ')
+console.log('data grouped in intervals: ')
 console.log(dataService.defineIntervals(numbers))
