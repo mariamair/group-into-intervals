@@ -6,26 +6,34 @@
  */
 
 export class DataProcessingService {
+  #sortedData
+
+  constructor (data, sortAscending = true) {
+    // Check valid data input
+    // Check type of data input
+
+    this.#sortedData = sortAscending ? this.sortDataAscending(data) : this.sortDataDescending(data)
+    console.log('data sorted (ascending = ' + sortAscending + '): ' + this.#sortedData)
+  }
 
   sortDataAscending (data) {
-    const sorted = Array.from(data)
-    return sorted.sort((a,b) => a - b)
+    return Array.from(data).sort((a,b) => a - b)
   }
 
   sortDataDescending (data) {
-    const sorted = Array.from(data)
-    return sorted.sort((a,b) => b - a)
+    return Array.from(data).sort((a,b) => b - a)
   }
 
-  defineIntervals (data) {
-    const numberOfIntervals = this.defineNumberOfIntervals(data)
-    const sorted = this.sortDataAscending(data)
-    
-    const minValue = sorted[0]
-    const maxValue = sorted[sorted.length - 1]
+  defineIntervals () {
+    const numberOfIntervals = this.defineNumberOfIntervals()
+
+    const minValue = this.#sortedData[0]
+    const maxValue = this.#sortedData[this.#sortedData.length - 1]
     const range = maxValue - minValue
     const intervalWidth = this.defineIntervalWidth(range, numberOfIntervals)
 
+    console.log('minValue: ' + minValue)
+    console.log('maxValue: ' + maxValue)
     console.log('numberOfIntervals: ' + numberOfIntervals)
     console.log('intervalWidth: ' + intervalWidth)
 
@@ -38,14 +46,14 @@ export class DataProcessingService {
       lowerBoundary = upperBoundary
     }
 
-    this.fillIntervalsWithData(sorted, intervals)
+    this.fillIntervalsWithData(intervals)
     
     return intervals
   }
 
   // Calculate the appropriate number of intervals using Sturges' formula (1 + 3.322 * log(number of data points))
-  defineNumberOfIntervals (data) {
-    return Math.round(1 + 3.322 * Math.log10(data.length))
+  defineNumberOfIntervals () {
+    return Math.round(1 + 3.322 * Math.log10(this.#sortedData.length))
   }
 
   // Calculate the interval width (range / number of intervals)
@@ -53,8 +61,8 @@ export class DataProcessingService {
     return Math.round(range / numberOfIntervals)
   }
 
-  fillIntervalsWithData(sorted, intervals) {
-    for (const dataPoint of sorted) {
+  fillIntervalsWithData(intervals) {
+    for (const dataPoint of this.#sortedData) {
       for (let i = 0; i < intervals.length; i++) {
         if (dataPoint >= intervals[i].lowerBoundary && dataPoint <= intervals[i].upperBoundary) {
           intervals[i].data.push(dataPoint)
