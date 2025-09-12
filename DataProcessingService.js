@@ -6,21 +6,23 @@
  */
 
 export class DataProcessingService {
+  #isAscending
   #sortedData
   #minValue
   #maxValue
 
-  constructor (data, sortAscending = true) {
+  constructor (data, isAscending = true) {
     // Check valid data input
     // Check type of data input
 
-    this.#sortedData = sortAscending ? this.sortDataAscending(data) : this.sortDataDescending(data)
+    this.#isAscending = isAscending
+    this.#sortedData = this.#isAscending ? this.sortDataAscending(data) : this.sortDataDescending(data)
     this.#minValue = this.#sortedData[0]
     this.#maxValue = this.#sortedData[this.#sortedData.length - 1]
 
     console.log('\nDATA PROCESSOR ')
     console.log('original data input: ' + data)
-    console.log('data sorted (ascending = ' + sortAscending + '): ' + this.#sortedData)
+    console.log('data sorted (ascending = ' + isAscending + '): ' + this.#sortedData)
   }
 
   sortDataAscending (data) {
@@ -36,20 +38,7 @@ export class DataProcessingService {
 
     const intervalWidth = this.defineIntervalWidth(this.calculateRange(), numberOfIntervals)
 
-    console.log('minValue: ' + this.#minValue)
-    console.log('maxValue: ' + this.#maxValue)
-    console.log('range: ' + this.calculateRange())
-    console.log('numberOfIntervals: ' + numberOfIntervals)
-    console.log('intervalWidth: ' + intervalWidth)
-
-    const intervals = []
-
-    let lowerBoundary = this.#minValue
-    for(let i = 0; i < numberOfIntervals; i++) {
-      const upperBoundary = lowerBoundary + intervalWidth
-      intervals.push({ lowerBoundary, upperBoundary: upperBoundary - 1, data: [] })
-      lowerBoundary = upperBoundary
-    }
+    const intervals = this.#isAscending ? this.defineIntervalBoundariesAscending(numberOfIntervals, intervalWidth) : this.defineIntervalBoundariesDescending(numberOfIntervals, intervalWidth)
 
     this.fillIntervalsWithData(intervals)
     
@@ -85,7 +74,37 @@ export class DataProcessingService {
     }
   }
 
+  defineIntervalBoundariesAscending(numberOfIntervals, intervalWidth) {
+    const intervals = []
+
+    let lowerBoundary = this.#minValue
+    for (let i = 0; i < numberOfIntervals; i++) {
+      const upperBoundary = lowerBoundary + intervalWidth
+      intervals.push({ lowerBoundary, upperBoundary: upperBoundary - 1, data: [] })
+      lowerBoundary = upperBoundary
+    }
+
+    return intervals
+  }
+
+  defineIntervalBoundariesDescending(numberOfIntervals, intervalWidth) {
+    const intervals = []
+
+    let upperBoundary = this.#minValue
+    for (let i = 0; i < numberOfIntervals; i++) {
+      const lowerBoundary = upperBoundary - intervalWidth
+      intervals.push({ upperBoundary, lowerBoundary: lowerBoundary + 1 })
+      upperBoundary = lowerBoundary
+    }
+
+    return intervals
+  }
+
   fillIntervalsWithData(intervals) {
+    for (const interval of intervals) {
+      interval.data = []
+    }
+
     for (const dataPoint of this.#sortedData) {
       for (let i = 0; i < intervals.length; i++) {
         if (dataPoint >= intervals[i].lowerBoundary && dataPoint <= intervals[i].upperBoundary) {

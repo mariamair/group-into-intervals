@@ -8,7 +8,7 @@
 import { DataProcessingService } from './DataProcessingService.js'
 
 // Get data input
-const dataArray = [1, 3, -5, 7, 8, 4, 17, 9, 3]
+const dataArray = [1, 3, -5, 7, 8, 4, 17, 12, 3]
 const shortArray = [1, 3, -5, 17, 3]
 
 // Get sort order (ascending or descending)
