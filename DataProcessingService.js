@@ -57,7 +57,7 @@ export class DataProcessingService {
   }
 
   calculateRange () {
-    return this.#maxValue - this.#minValue
+    return Math.abs(this.#maxValue - this.#minValue)
   }
 
   // Calculate the appropriate number of intervals using Sturges' formula (1 + 3.322 * log(number of data points))
