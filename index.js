@@ -12,18 +12,18 @@ const dataArray = [1, 3, -5, 7, 8, 4, 17, 9, 3]
 const shortArray = [1, 3, -5, 17, 3]
 
 // Get sort order (ascending or descending)
-const ascending = true
+const isAscending = true
 
 // Get color scheme
 
 // Add color from selected scheme to each interval
 
 // Return data as intervals with color scheme
-const dataService = new DataProcessingService(dataArray, ascending)
+const dataService = new DataProcessingService(dataArray, isAscending)
 console.log('\ndata grouped in intervals 1 \n---------------------------')
 console.log(dataService.defineIntervals())
 
-const dataServiceShortArray = new DataProcessingService(shortArray, ascending)
+const dataServiceShortArray = new DataProcessingService(shortArray, isAscending)
 console.log('\ndata grouped in intervals 2 \n--------------------------- ')
 console.log(dataServiceShortArray.defineIntervals())
 
