@@ -8,7 +8,8 @@
 import { DataProcessingService } from './DataProcessingService.js'
 
 // Get data input
-const numbers = [1, 3, -5, 7, 8, 4, 17, 9, 3]
+const dataArray = [1, 3, -5, 7, 8, 4, 17, 9, 3]
+const shortArray = [1, 3, -5, 17, 3]
 
 // Get sort order (ascending or descending)
 const ascending = true
@@ -18,7 +19,18 @@ const ascending = true
 // Add color from selected scheme to each interval
 
 // Return data as intervals with color scheme
-const dataService = new DataProcessingService(numbers, ascending)
-console.log('original data input: ' + numbers)
-console.log('data grouped in intervals: ')
+const dataService = new DataProcessingService(dataArray, ascending)
+console.log('\ndata grouped in intervals 1 \n---------------------------')
 console.log(dataService.defineIntervals())
+
+const dataServiceShortArray = new DataProcessingService(shortArray, ascending)
+console.log('\ndata grouped in intervals 2 \n--------------------------- ')
+console.log(dataServiceShortArray.defineIntervals())
+
+const dataServiceDesc = new DataProcessingService(dataArray, false)
+console.log('\ndata grouped in intervals 3 \n--------------------------- ')
+console.log(dataServiceDesc.defineIntervals())
+
+const dataServiceShortArrayDesc = new DataProcessingService(shortArray, false)
+console.log('\ndata grouped in intervals 4 \n--------------------------- ')
+console.log(dataServiceShortArrayDesc.defineIntervals())
