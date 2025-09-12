@@ -7,12 +7,19 @@
 
 export class DataProcessingService {
   #sortedData
+  #minValue
+  #maxValue
 
   constructor (data, sortAscending = true) {
     // Check valid data input
     // Check type of data input
 
     this.#sortedData = sortAscending ? this.sortDataAscending(data) : this.sortDataDescending(data)
+    this.#minValue = this.#sortedData[0]
+    this.#maxValue = this.#sortedData[this.#sortedData.length - 1]
+
+    console.log('\nDATA PROCESSOR ')
+    console.log('original data input: ' + data)
     console.log('data sorted (ascending = ' + sortAscending + '): ' + this.#sortedData)
   }
 
@@ -27,19 +34,17 @@ export class DataProcessingService {
   defineIntervals () {
     const numberOfIntervals = this.defineNumberOfIntervals()
 
-    const minValue = this.#sortedData[0]
-    const maxValue = this.#sortedData[this.#sortedData.length - 1]
-    const range = maxValue - minValue
-    const intervalWidth = this.defineIntervalWidth(range, numberOfIntervals)
+    const intervalWidth = this.defineIntervalWidth(this.calculateRange(), numberOfIntervals)
 
-    console.log('minValue: ' + minValue)
-    console.log('maxValue: ' + maxValue)
+    console.log('minValue: ' + this.#minValue)
+    console.log('maxValue: ' + this.#maxValue)
+    console.log('range: ' + this.calculateRange())
     console.log('numberOfIntervals: ' + numberOfIntervals)
     console.log('intervalWidth: ' + intervalWidth)
 
     const intervals = []
 
-    let lowerBoundary = minValue
+    let lowerBoundary = this.#minValue
     for(let i = 0; i < numberOfIntervals; i++) {
       const upperBoundary = lowerBoundary + intervalWidth
       intervals.push({ lowerBoundary, upperBoundary: upperBoundary - 1, data: [] })
@@ -51,6 +56,10 @@ export class DataProcessingService {
     return intervals
   }
 
+  calculateRange () {
+    return this.#maxValue - this.#minValue
+  }
+
   // Calculate the appropriate number of intervals using Sturges' formula (1 + 3.322 * log(number of data points))
   defineNumberOfIntervals () {
     return Math.round(1 + 3.322 * Math.log10(this.#sortedData.length))
@@ -58,7 +67,22 @@ export class DataProcessingService {
 
   // Calculate the interval width (range / number of intervals)
   defineIntervalWidth (range, numberOfIntervals) {
-    return Math.round(range / numberOfIntervals)
+    let intervalWidth = Math.round(range / numberOfIntervals)
+
+    while (!this.isRangeWithinIntervals(numberOfIntervals, intervalWidth, range)) {
+      intervalWidth++
+    }
+
+    return intervalWidth
+  }
+
+  isRangeWithinIntervals(numberOfIntervals, intervalWidth, range) {
+    if (numberOfIntervals * intervalWidth < range) {
+      return false
+    }
+    else {
+      return true
+    }
   }
 
   fillIntervalsWithData(intervals) {
