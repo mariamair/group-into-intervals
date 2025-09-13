@@ -1,9 +1,11 @@
 /** 
- * This class contains function to process the data input.
+ * This class contains methods to process the data input.
  * 
  * @author Maria Mair <mm225mz@student.lnu.se>
  * @version 0.0.1
  */
+
+import { isArray, isMixedTypeArray } from './dataValidator.js'
 
 export class DataProcessingService {
   #isAscending
@@ -13,10 +15,20 @@ export class DataProcessingService {
 
   constructor (data, isAscending = true) {
     // Check valid data input
+    if (!isArray(data)) {
+      throw new TypeError ('Data has to be an array.')
+    }
+
+    if (isMixedTypeArray(data)) {
+      throw new TypeError ('All data has to be of the same type')
+    }
     // Check type of data input
 
+    // Copy the original array and remove empty slots
+    const denseArray = data.flat()
+
     this.#isAscending = isAscending
-    this.#sortedData = this.#isAscending ? this.sortDataAscending(data) : this.sortDataDescending(data)
+    this.#sortedData = this.#isAscending ? this.sortDataAscending(denseArray) : this.sortDataDescending(denseArray)
     this.#minValue = this.#sortedData[0]
     this.#maxValue = this.#sortedData[this.#sortedData.length - 1]
 
@@ -26,11 +38,11 @@ export class DataProcessingService {
   }
 
   sortDataAscending (data) {
-    return Array.from(data).sort((a,b) => a - b)
+    return data.sort((a,b) => a - b)
   }
 
   sortDataDescending (data) {
-    return Array.from(data).sort((a,b) => b - a)
+    return data.sort((a,b) => b - a)
   }
 
   defineIntervals () {
