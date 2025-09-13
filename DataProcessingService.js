@@ -5,7 +5,7 @@
  * @version 0.0.1
  */
 
-import { isArray, isMixedTypeArray } from './dataValidator.js'
+import { isArray, isMixedTypeArray, getFirstElementType } from './dataValidator.js'
 
 export class DataProcessingService {
   #isAscending
@@ -21,6 +21,10 @@ export class DataProcessingService {
 
     if (isMixedTypeArray(data)) {
       throw new TypeError ('All data has to be of the same type')
+    }
+
+    if (getFirstElementType(data) !== 'number') {
+      throw new TypeError ('Module only handles numbers')
     }
     // Check type of data input
 

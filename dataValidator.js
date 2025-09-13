@@ -10,10 +10,13 @@ export function isArray (dataToValidate) {
 }
 
 export function isMixedTypeArray (dataToValidate) {
-  const typeOfFirstElement = typeof dataToValidate[0]
+  const typeOfFirstElement = getFirstElementType(dataToValidate) 
 
   const isSameType = (element) => typeof element === typeOfFirstElement
 
   return !dataToValidate.every(isSameType)
 }
 
+export function getFirstElementType (dataToValidate) {
+  return typeof dataToValidate[0]
+}
