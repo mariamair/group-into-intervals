@@ -8,7 +8,7 @@
   ],
   "type": "module",
   "author": "Maria Mair <mm225mz@student.lnu.se>",
-  "repository": "https://github.com/mariamair/1DV610_Lab2",
+  "repository": "https://github.com/mariamair/group-into-intervals",
   "license": "MIT",
   "main": "index.js",
   "scripts": {
