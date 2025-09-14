@@ -6,9 +6,7 @@
  */
 
 export class ColorSelector {
-
-  selectColorScheme (colorSchemeId) {
-    const colorSchemes = [ 
+  #colorSchemes = [ 
       { 
         id: 1, name: 'red, violet, blue', 
         hexValues: ['#be2020', '#7532a8', '#1a02f0'], 
@@ -27,14 +25,9 @@ export class ColorSelector {
         rgbValues: ['rgb(255, 255, 255)', 'rgb(94, 193, 56)', 'rgb(58, 109, 37)'] 
     }]
 
-    for (const scheme of colorSchemes) {
-      if (colorSchemeId === scheme.id) {
-        return scheme
-      }
+  getColorSchemes () {
+    return this.#colorSchemes
     }
-
-    throw Error ('Invalid color scheme')
-  }
 
   addColorSchemeToIntervals (numberOfIntervals, intervals, colorScheme) {
     let numberOfColors = colorScheme.rgbValues.length
