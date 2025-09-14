@@ -26,7 +26,6 @@ export class DataProcessingService {
     if (getFirstElementType(data) !== 'number') {
       throw new TypeError ('Module only handles numbers')
     }
-    // Check type of data input
 
     // Copy the original array and remove empty slots
     const denseArray = data.flat()
