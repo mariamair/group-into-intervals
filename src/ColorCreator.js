@@ -6,13 +6,12 @@
  */
 
 export class ColorCreator {
-  #numberOfIntervals
   #colors
 
-  getColors (colors, intervals) {
+  // Setting the default to 9 because more values give colors that are too similar.
+  getColors (colors, numberOfIntervals = 9) {
     this.setStartingColors(colors)
-    this.setNumberOfIntervals(intervals)
-    while (this.hasMoreIntervalsThanColors()){
+    while (this.hasMoreIntervalsThanColors(numberOfIntervals)){
       this.createColors()
     }
     return this.#colors
@@ -23,12 +22,8 @@ export class ColorCreator {
     this.#colors = colors
   }
 
-  setNumberOfIntervals (numberOfIntervals) {
-    this.#numberOfIntervals = numberOfIntervals
-  }
-
-  hasMoreIntervalsThanColors () {
-    if (this.#numberOfIntervals > this.#colors.length) {
+  hasMoreIntervalsThanColors (numberOfIntervals) {
+    if (numberOfIntervals > this.#colors.length) {
       return true
     }
     return false
