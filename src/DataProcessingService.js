@@ -104,7 +104,7 @@ export class DataProcessingService {
   calculateIntervalWidth () {
     let intervalWidth = Math.round(this.#range / this.#numberOfIntervals)
 
-    while (!this.isRangeWithinIntervals(this.#numberOfIntervals, intervalWidth, this.#range)) {
+    while (!this.isRangeWithinIntervals(this.#range, this.#numberOfIntervals, intervalWidth )) {
       intervalWidth++
     }
 
@@ -112,19 +112,15 @@ export class DataProcessingService {
   }
 
   defineIntervalBoundaries () {
-    const intervals = this.#isAscending ? this.defineIntervalBoundariesAscending(this.#numberOfIntervals, this.#intervalWidth) : this.defineIntervalBoundariesDescending(this.#numberOfIntervals, this.#intervalWidth)
-    
-    this.#intervals = intervals
+    this.#intervals = this.#isAscending ? this.defineIntervalBoundariesAscending(this.#numberOfIntervals, this.#intervalWidth) : this.defineIntervalBoundariesDescending(this.#numberOfIntervals, this.#intervalWidth)
   }
 
 
-  isRangeWithinIntervals(numberOfIntervals, intervalWidth, range) {
-    if (numberOfIntervals * intervalWidth < range) {
-      return false
-    }
-    else {
+  isRangeWithinIntervals(range, numberOfIntervals, intervalWidth) {
+    if (range < numberOfIntervals * intervalWidth) {
       return true
     }
+    return false
   }
 
   defineIntervalBoundariesAscending(numberOfIntervals, intervalWidth) {
