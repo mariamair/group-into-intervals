@@ -13,7 +13,14 @@ export function displayColorSchemes () {
   return colorSelector.getColorSchemes()
 }
 
-export function groupIntoIntervals (data, isAscending, selectedColorScheme) {
-  const dataService = new DataProcessingService(data, isAscending, selectedColorScheme)
-  return dataService.defineIntervals()
+export function groupIntoIntervals (data) {
+  const dataService = new DataProcessingService()
+  return dataService.getIntervals(data)
+}
+
+export function groupIntoIntervalsWithOptions (data, isAscending, selectedColorScheme) {
+  const dataService = new DataProcessingService()
+  dataService.setSortingOrder(isAscending)
+  dataService.setColorScheme(selectedColorScheme)
+  return dataService.getIntervals(data)
 }

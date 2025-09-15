@@ -6,79 +6,117 @@
  */
 
 import { isArray, isMixedTypeArray, getFirstElementType } from './dataValidator.js'
+import { ColorSelector } from './ColorSelector.js'
 
 export class DataProcessingService {
-  #isAscending
+  #isAscending = true
+  #colorScheme = 1
+  #denseData
   #sortedData
   #minValue
   #maxValue
+  #intervals
+  #intervalWidth
+  #numberOfIntervals
+  #range
 
-  constructor (data, isAscending = true) {
-    // Check valid data input
-    if (!isArray(data)) {
-      throw new TypeError ('Data has to be an array.')
-    }
+  getIntervals (originalData) {
+    this.setData(originalData)
+    this.setMetaData()
+    this.defineIntervalBoundaries()
+    this.fillIntervalsWithData()
+    return this.#intervals
+  }
 
-    if (isMixedTypeArray(data)) {
-      throw new TypeError ('All data has to be of the same type')
+  getIntervalMetadata (originalData) {
+    this.setData(originalData)
+    this.setMetaData()
+    return {
+      minValue: this.#isAscending ? this.#minValue : this.#maxValue,
+      maxValue: this.#isAscending ? this.#maxValue : this.#minValue,
+      range: this.#range,
+      numberOfIntervals: this.#numberOfIntervals,
+      intervalWidth: this.#intervalWidth
     }
+  }
 
-    if (getFirstElementType(data) !== 'number') {
-      throw new TypeError ('Module only handles numbers')
-    }
+  setSortingOrder (isAscending) {
+    this.#isAscending = isAscending
+  }
+
+  setColorScheme (selectedColorScheme){
+    this.#colorScheme = selectedColorScheme
+  }
+
+  setData (originalData) {
+    this.validateData(originalData)
 
     // Copy the original array and remove empty slots
-    const denseArray = data.flat()
+    this.#denseData = originalData.flat()
 
-    this.#isAscending = isAscending
-    this.#sortedData = this.#isAscending ? this.sortDataAscending(denseArray) : this.sortDataDescending(denseArray)
+    this.#sortedData = this.#isAscending ? this.sortDataAscending() : this.sortDataDescending()
+  }
+
+  validateData (originalData) {
+    if (!isArray(originalData)) {
+      throw new TypeError('Data has to be an array.')
+    }
+
+    if (isMixedTypeArray(originalData)) {
+      throw new TypeError('All data has to be of the same type')
+    }
+
+    if (getFirstElementType(originalData) !== 'number') {
+      throw new TypeError('Module only handles numbers')
+    }
+  }
+
+  sortDataAscending () {
+    return this.#denseData.sort((a,b) => a - b)
+  }
+
+  sortDataDescending () {
+    return this.#denseData.sort((a,b) => b - a)
+  }
+
+  setMetaData () {
+    this.setMaxAndMinValue()
+    this.calculateRange()
+    this.calculateNumberOfIntervals()
+    this.calculateIntervalWidth()
+  }
+
+  setMaxAndMinValue () {
     this.#minValue = this.#sortedData[0]
     this.#maxValue = this.#sortedData[this.#sortedData.length - 1]
-
-    console.log('\nDATA PROCESSOR ')
-    console.log('original data input: ' + data)
-    console.log('data sorted (ascending = ' + isAscending + '): ' + this.#sortedData)
-  }
-
-  sortDataAscending (data) {
-    return data.sort((a,b) => a - b)
-  }
-
-  sortDataDescending (data) {
-    return data.sort((a,b) => b - a)
-  }
-
-  defineIntervals () {
-    const numberOfIntervals = this.defineNumberOfIntervals()
-
-    const intervalWidth = this.defineIntervalWidth(this.calculateRange(), numberOfIntervals)
-
-    const intervals = this.#isAscending ? this.defineIntervalBoundariesAscending(numberOfIntervals, intervalWidth) : this.defineIntervalBoundariesDescending(numberOfIntervals, intervalWidth)
-
-    this.fillIntervalsWithData(intervals)
-    
-    return intervals
   }
 
   calculateRange () {
-    return Math.abs(this.#maxValue - this.#minValue)
+    this.#range = Math.abs(this.#maxValue - this.#minValue)
   }
 
   // Calculate the appropriate number of intervals using Sturges' formula (1 + 3.322 * log(number of data points))
-  defineNumberOfIntervals () {
-    return Math.round(1 + 3.322 * Math.log10(this.#sortedData.length))
+  calculateNumberOfIntervals () {
+    this.#numberOfIntervals = Math.round(1 + 3.322 * Math.log10(this.#sortedData.length))
   }
 
   // Calculate the interval width (range / number of intervals)
-  defineIntervalWidth (range, numberOfIntervals) {
-    let intervalWidth = Math.round(range / numberOfIntervals)
+  calculateIntervalWidth () {
+    let intervalWidth = Math.round(this.#range / this.#numberOfIntervals)
 
-    while (!this.isRangeWithinIntervals(numberOfIntervals, intervalWidth, range)) {
+    while (!this.isRangeWithinIntervals(this.#numberOfIntervals, intervalWidth, this.#range)) {
       intervalWidth++
     }
 
-    return intervalWidth
+    this.#intervalWidth = intervalWidth
   }
+
+  defineIntervalBoundaries () {
+    const intervals = this.#isAscending ? this.defineIntervalBoundariesAscending(this.#numberOfIntervals, this.#intervalWidth) : this.defineIntervalBoundariesDescending(this.#numberOfIntervals, this.#intervalWidth)
+    
+    this.#intervals = intervals
+  }
+
 
   isRangeWithinIntervals(numberOfIntervals, intervalWidth, range) {
     if (numberOfIntervals * intervalWidth < range) {
@@ -90,40 +128,40 @@ export class DataProcessingService {
   }
 
   defineIntervalBoundariesAscending(numberOfIntervals, intervalWidth) {
-    const intervals = []
+    const intervalBoundaries = []
 
     let lowerBoundary = this.#minValue
     for (let i = 0; i < numberOfIntervals; i++) {
       const upperBoundary = lowerBoundary + intervalWidth
-      intervals.push({ lowerBoundary, upperBoundary: upperBoundary - 1, data: [] })
+      intervalBoundaries.push({ lowerBoundary, upperBoundary: upperBoundary - 1, data: [] })
       lowerBoundary = upperBoundary
     }
 
-    return intervals
+    return intervalBoundaries
   }
 
   defineIntervalBoundariesDescending(numberOfIntervals, intervalWidth) {
-    const intervals = []
+    const intervalBoundaries = []
 
     let upperBoundary = this.#minValue
     for (let i = 0; i < numberOfIntervals; i++) {
       const lowerBoundary = upperBoundary - intervalWidth
-      intervals.push({ upperBoundary, lowerBoundary: lowerBoundary + 1 })
+      intervalBoundaries.push({ upperBoundary, lowerBoundary: lowerBoundary + 1 })
       upperBoundary = lowerBoundary
     }
 
-    return intervals
+    return intervalBoundaries
   }
 
-  fillIntervalsWithData(intervals) {
-    for (const interval of intervals) {
+  fillIntervalsWithData() {
+    for (const interval of this.#intervals) {
       interval.data = []
     }
 
     for (const dataPoint of this.#sortedData) {
-      for (let i = 0; i < intervals.length; i++) {
-        if (dataPoint >= intervals[i].lowerBoundary && dataPoint <= intervals[i].upperBoundary) {
-          intervals[i].data.push(dataPoint)
+      for (let i = 0; i < this.#intervals.length; i++) {
+        if (dataPoint >= this.#intervals[i].lowerBoundary && dataPoint <= this.#intervals[i].upperBoundary) {
+          this.#intervals[i].data.push(dataPoint)
         }
       }
     }
