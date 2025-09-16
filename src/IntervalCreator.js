@@ -18,7 +18,7 @@ export class IntervalCreator {
   #numberOfIntervals
   #range
 
-  constructor (originalData, isAscending) {
+  constructor (originalData, isAscending = true) {
     this.setSortingOrder(isAscending)
     this.setData(originalData)
     this.setMetaData()
