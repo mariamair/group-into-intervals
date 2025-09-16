@@ -6,11 +6,9 @@
  */
 
 import { isArray, isMixedTypeArray, getFirstElementType } from './dataValidator.js'
-import { ColorSelector } from './ColorSelector.js'
 
 export class DataProcessingService {
   #isAscending = true
-  #colorScheme = 1
   #denseData
   #sortedData
   #minValue
@@ -20,17 +18,19 @@ export class DataProcessingService {
   #numberOfIntervals
   #range
 
-  getIntervals (originalData) {
+  constructor (originalData, isAscending) {
+    this.setSortingOrder(isAscending)
     this.setData(originalData)
     this.setMetaData()
+  }
+
+  getIntervals () {
     this.defineIntervalBoundaries()
     this.fillIntervalsWithData()
     return this.#intervals
   }
 
-  getIntervalMetadata (originalData) {
-    this.setData(originalData)
-    this.setMetaData()
+  getIntervalMetadata () {
     return {
       minValue: this.#isAscending ? this.#minValue : this.#maxValue,
       maxValue: this.#isAscending ? this.#maxValue : this.#minValue,
@@ -40,12 +40,12 @@ export class DataProcessingService {
     }
   }
 
-  setSortingOrder (isAscending) {
-    this.#isAscending = isAscending
+  getSortedArray () {
+    return this.#sortedData
   }
 
-  setColorScheme (selectedColorScheme){
-    this.#colorScheme = selectedColorScheme
+  setSortingOrder (isAscending) {
+    this.#isAscending = isAscending
   }
 
   setData (originalData) {
@@ -114,7 +114,6 @@ export class DataProcessingService {
   defineIntervalBoundaries () {
     this.#intervals = this.#isAscending ? this.defineIntervalBoundariesAscending(this.#numberOfIntervals, this.#intervalWidth) : this.defineIntervalBoundariesDescending(this.#numberOfIntervals, this.#intervalWidth)
   }
-
 
   isRangeWithinIntervals(range, numberOfIntervals, intervalWidth) {
     if (range < numberOfIntervals * intervalWidth) {
