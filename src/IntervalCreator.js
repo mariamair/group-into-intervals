@@ -7,7 +7,7 @@
 
 import { isArray, isMixedTypeArray, getFirstElementType } from './dataValidator.js'
 
-export class DataProcessingService {
+export class IntervalCreator {
   #isAscending = true
   #denseData
   #sortedData
