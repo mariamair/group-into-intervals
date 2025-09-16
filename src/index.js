@@ -5,22 +5,34 @@
  * @version 0.0.1
  */
 
-import { DataProcessingService } from './DataProcessingService.js'
+import { DataProcessingService } from './IntervalCreator.js'
 import { ColorSelector } from './ColorSelector.js'
+import { IntervalAndColorMatcher } from './IntervalAndColorMatcher.js'
 
 export function displayColorSchemes () {
   const colorSelector = new ColorSelector()
   return colorSelector.getColorSchemes()
 }
 
-export function groupIntoIntervals (data) {
-  const dataService = new DataProcessingService()
-  return dataService.getIntervals(data)
+export function groupIntoIntervalsAscending (data) {
+  const intervalCreator = new DataProcessingService(data)
+  return intervalCreator.getIntervals()
+}
+
+export function groupIntoIntervalsDescending (data) {
+  const intervalCreator = new DataProcessingService(data, false)
+  return intervalCreator.getIntervals()
 }
 
 export function groupIntoIntervalsWithOptions (data, isAscending, selectedColorScheme) {
-  const dataService = new DataProcessingService()
-  dataService.setSortingOrder(isAscending)
-  dataService.setColorScheme(selectedColorScheme)
-  return dataService.getIntervals(data)
+  const intervalCreator = new DataProcessingService(data, isAscending)
+  const intervals = intervalCreator.getIntervals()
+  const numberOfIntervals = intervalCreator.getIntervalMetadata().numberOfIntervals
+  
+  const colorMatcher = new IntervalAndColorMatcher(selectedColorScheme, intervals, numberOfIntervals)
+  const intervalsWithColors = colorMatcher.getColors()
+
+  return intervalsWithColors
 }
+
+
