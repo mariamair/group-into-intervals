@@ -14,6 +14,15 @@ export class ColorConverter {
     return rgbValueString.split(separator).filter(convertToInt).map(convertToInt)
   }
 
+  convertMultipleRgbStringsToArray (rgbStringWithMultipleValues) {
+    const rgbArray = []
+
+    for(const color of rgbStringWithMultipleValues) {
+      rgbArray.push(this.convertRgbStringToArray(color))
+    }
+    return rgbArray
+  }
+
   convertRgbArrayToString (rgbValueArray) {
     return 'rgb(' + rgbValueArray[0] + ', ' + rgbValueArray[1] + ', ' + rgbValueArray[2] + ')'
   }

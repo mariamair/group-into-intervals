@@ -7,6 +7,7 @@
 
 import { ColorCreator } from './ColorCreator.js'
 import { ColorConverter } from './ColorConverter.js'
+import { ColorSelector } from './ColorSelector.js'
 
 export class IntervalAndColorMatcher {
   #colorConverter = new ColorConverter()
@@ -14,11 +15,16 @@ export class IntervalAndColorMatcher {
   #numberOfIntervals
   #selectedColors
 
-  constructor (selectedColorScheme, intervals, numberOfIntervals) {
-    // this.#selectedColors = selectedColorScheme.rgbValues //         rgbValues: ['rgb(190, 32, 32)', 'rgb(117, 50, 168)', 'rgb(26, 2, 240)'] 
-    this.#selectedColors = this.convertColorsToArray(selectedColorScheme)
+  constructor (selectedColorSchemeId, intervals, numberOfIntervals) {
+    const selectedScheme = this.getSelectedColorScheme(selectedColorSchemeId)
+    this.#selectedColors = this.convertRgbStringToArray(selectedScheme.rgbValues)
     this.#intervals = intervals
     this.#numberOfIntervals = numberOfIntervals
+  }
+
+  getSelectedColorScheme (id) {
+    const colorSelector = new ColorSelector()
+    return colorSelector.getSelectedColorScheme(id)
   }
 
   getColors () {
@@ -26,8 +32,8 @@ export class IntervalAndColorMatcher {
     return colorCreator.getColors(this.#selectedColors, this.#numberOfIntervals)
   }
 
-  convertRgbStringToArray (rgbString) {
-    this.#colorConverter.convertRgbStringToArray(rgbString)
+  convertRgbStringToArray (rgbStringWithMultipleValues) {
+    return this.#colorConverter.convertMultipleRgbStringsToArray(rgbStringWithMultipleValues)
   }
 
   convertToRgbString (rgbArray) {
