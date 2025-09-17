@@ -37,11 +37,11 @@ export class IntervalAndColorMatcher {
   }
 
   convertToRgbString (rgbArray) {
-    this.#colorConverter.convertRgbArrayToString(rgbArray)
+    return this.#colorConverter.convertRgbArrayToString(rgbArray)
   }
 
   convertToHexValue (rgbArray) {
-    this.#colorConverter.convertRgbArraytoHexValue(rgbArray)
+    return this.#colorConverter.convertRgbArraytoHexValue(rgbArray)
   }
 
   addColorToIntervals () {
