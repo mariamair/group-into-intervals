@@ -28,6 +28,6 @@ export class ColorConverter {
   }
 
   convertRgbArraytoHexValue (rgbValueArray) {
-    return '#' + rgbValueArray[0].toString(16) + rgbValueArray[1].toString(16) + rgbValueArray[2].toString(16)
+    return '#' + rgbValueArray[0].toString(16).padStart(2, '0') + rgbValueArray[1].toString(16).padStart(2, '0') + rgbValueArray[2].toString(16).padStart(2, '0')
   }
 }
