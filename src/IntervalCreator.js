@@ -8,7 +8,7 @@
 import { isArray, isMixedTypeArray, getFirstElementType } from './dataValidator.js'
 
 export class IntervalCreator {
-  #isAscending = true
+  #isAscending
   #denseData
   #sortedData
   #minValue
@@ -128,7 +128,7 @@ export class IntervalCreator {
     let lowerBoundary = this.#minValue
     for (let i = 0; i < numberOfIntervals; i++) {
       const upperBoundary = lowerBoundary + intervalWidth
-      intervalBoundaries.push({ lowerBoundary, upperBoundary: upperBoundary - 1, data: [] })
+      intervalBoundaries.push({ lowerBoundary, upperBoundary: upperBoundary - 1 })
       lowerBoundary = upperBoundary
     }
 

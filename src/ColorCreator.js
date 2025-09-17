@@ -18,7 +18,6 @@ export class ColorCreator {
   }
 
   setStartingColors (colors) {
-    // this.#colors = [[190, 32, 32], [117, 50, 168], [26, 2, 240]]
     this.#colors = colors
   }
 
