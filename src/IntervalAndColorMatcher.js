@@ -15,11 +15,11 @@ export class IntervalAndColorMatcher {
   #numberOfIntervals
   #selectedColors
 
-  constructor (selectedColorSchemeId, intervals, numberOfIntervals) {
+  constructor (selectedColorSchemeId, intervals) {
     const selectedScheme = this.getSelectedColorScheme(selectedColorSchemeId)
     this.#selectedColors = this.convertRgbStringToArray(selectedScheme.rgbValues)
     this.#intervals = intervals
-    this.#numberOfIntervals = numberOfIntervals
+    this.#numberOfIntervals = intervals.length
   }
 
   getSelectedColorScheme (id) {
