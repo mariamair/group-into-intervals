@@ -5,18 +5,46 @@
  * @version 0.0.1
  */
 
-export function isArray (dataToValidate) {
-  return Array.isArray(dataToValidate)
+import { ColorSelector } from './ColorSelector.js'
+
+export class DataValidator {
+
+  isArray (dataToValidate) {
+    return Array.isArray(dataToValidate)
+  }
+
+  isMixedTypeArray (dataToValidate) {
+    const typeOfFirstElement = this.getFirstElementType(dataToValidate) 
+
+    const isSameType = (element) => typeof element === typeOfFirstElement
+
+    return !dataToValidate.every(isSameType)
+  }
+
+  getFirstElementType (dataToValidate) {
+    return typeof dataToValidate[0]
+  }
+
+  isValidColorScheme (selectedColorScheme) {
+    const colorSelector = new ColorSelector()
+    const colorSchemes = colorSelector.getColorSchemes()
+    let validId = false
+    for (const scheme of colorSchemes) {
+      if (scheme.id === selectedColorScheme) {
+        validId = true
+      }
+    }
+
+    if (!validId) {
+      throw new Error ('Not a valid color scheme')
+    }
+  }
+
+  isValidAscendingValue (isAscending) {
+    if (typeof isAscending !== 'boolean' && isAscending !== undefined) {
+      throw new Error ('Not a valid value for parameter "isAscending"')
+    }
+  }
 }
 
-export function isMixedTypeArray (dataToValidate) {
-  const typeOfFirstElement = getFirstElementType(dataToValidate) 
 
-  const isSameType = (element) => typeof element === typeOfFirstElement
-
-  return !dataToValidate.every(isSameType)
-}
-
-export function getFirstElementType (dataToValidate) {
-  return typeof dataToValidate[0]
-}

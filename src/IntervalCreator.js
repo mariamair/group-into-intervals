@@ -5,7 +5,7 @@
  * @version 0.0.1
  */
 
-import { isArray, isMixedTypeArray, getFirstElementType } from './dataValidator.js'
+import { DataValidator } from './DataValidator.js'
 
 export class IntervalCreator {
   #isAscending
@@ -58,15 +58,16 @@ export class IntervalCreator {
   }
 
   validateData (originalData) {
-    if (!isArray(originalData)) {
+    const dataValidator = new DataValidator()
+    if (!dataValidator.isArray(originalData)) {
       throw new TypeError('Data has to be an array.')
     }
 
-    if (isMixedTypeArray(originalData)) {
+    if (dataValidator.isMixedTypeArray(originalData)) {
       throw new TypeError('All data has to be of the same type')
     }
 
-    if (getFirstElementType(originalData) !== 'number') {
+    if (dataValidator.getFirstElementType(originalData) !== 'number') {
       throw new TypeError('Module only handles numbers')
     }
   }
