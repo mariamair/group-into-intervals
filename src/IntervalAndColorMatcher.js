@@ -5,8 +5,8 @@
  * @version 0.0.1
  */
 
-import { ColorCreator } from './ColorCreator.js'
 import { ColorConverter } from './ColorConverter.js'
+import { ColorCreator } from './ColorCreator.js'
 import { ColorSelector } from './ColorSelector.js'
 
 export class IntervalAndColorMatcher {
@@ -27,7 +27,7 @@ export class IntervalAndColorMatcher {
     return colorSelector.getSelectedColorScheme(id)
   }
 
-  getColors () {
+  getIntervalsWithColors () {
     const colorCreator = new ColorCreator()
     return colorCreator.getColors(this.#selectedColors, this.#numberOfIntervals)
   }
@@ -45,7 +45,7 @@ export class IntervalAndColorMatcher {
   }
 
   addColorToIntervals () {
-    const colorList = this.getColors()
+    const colorList = this.getIntervalsWithColors()
 
     for (let i = 0; i < this.#intervals.length; i++) {
       this.#intervals[i].color = { hexValue: this.convertToHexValue(colorList[i]), rgbValue: this.convertToRgbString(colorList[i]) }

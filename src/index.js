@@ -5,9 +5,10 @@
  * @version 0.0.1
  */
 
-import { IntervalCreator } from './IntervalCreator.js'
 import { ColorSelector } from './ColorSelector.js'
+import { DataValidator } from './DataValidator.js'
 import { IntervalAndColorMatcher } from './IntervalAndColorMatcher.js'
+import { IntervalCreator } from './IntervalCreator.js'
 
 export function displayColorSchemes () {
   const colorSelector = new ColorSelector()
@@ -24,13 +25,28 @@ export function groupIntoIntervalsDescending (data) {
   return intervalCreator.getIntervals()
 }
 
-export function groupIntoIntervalsWithOptions (data, selectedColorScheme, isAscending) {
-  // Check if selectedColorScheme is within range 1 - 4 and that isAscending is boolean (if it is provided)
-  const intervalCreator = new IntervalCreator(data, isAscending)
+export function groupIntoIntervalsWithColorsAscending (data, colorSchemeId) {
+  const dataValidator = new DataValidator()
+  dataValidator.isValidColorScheme(colorSchemeId)
+
+  const intervalCreator = new IntervalCreator(data)
   const intervals = intervalCreator.getIntervals()
   
-  const colorMatcher = new IntervalAndColorMatcher(intervals, selectedColorScheme)
-  const intervalsWithColors = colorMatcher.getColors()
+  const colorMatcher = new IntervalAndColorMatcher(intervals, colorSchemeId)
+  const intervalsWithColors = colorMatcher.getIntervalsWithColors()
+
+  return intervalsWithColors
+}
+
+export function groupIntoIntervalsWithColorsDescending (data, colorSchemeId) {
+  const dataValidator = new DataValidator()
+  dataValidator.isValidColorScheme(colorSchemeId)
+
+  const intervalCreator = new IntervalCreator(data, false)
+  const intervals = intervalCreator.getIntervals()
+  
+  const colorMatcher = new IntervalAndColorMatcher(intervals, colorSchemeId)
+  const intervalsWithColors = colorMatcher.getIntervalsWithColors()
 
   return intervalsWithColors
 }
@@ -39,5 +55,3 @@ export function getIntervalMetadata (data, isAscending) {
   const intervalCreator = new IntervalCreator(data, isAscending)
   return intervalCreator.getIntervalMetadata()
 }
-
-
