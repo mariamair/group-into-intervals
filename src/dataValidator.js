@@ -39,12 +39,6 @@ export class DataValidator {
       throw new Error ('Not a valid color scheme')
     }
   }
-
-  isValidAscendingValue (isAscending) {
-    if (typeof isAscending !== 'boolean' && isAscending !== undefined) {
-      throw new Error ('Not a valid value for parameter "isAscending"')
-    }
-  }
 }
 
 

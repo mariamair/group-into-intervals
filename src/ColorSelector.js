@@ -27,7 +27,7 @@ export class ColorSelector {
 
   getColorSchemes () {
     return this.#colorSchemes
-    }
+  }
 
   getSelectedColorScheme (id) {
     return this.#colorSchemes[id - 1]
