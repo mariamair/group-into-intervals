@@ -19,6 +19,15 @@ export function displayColorSchemes () {
   }
 }
 
+export function displayColorScheme (colorSchemeId) {
+  try {
+      const colorSelector = new ColorSelector()
+      return colorSelector.getSelectedColorScheme(colorSchemeId)
+  } catch (error) {
+    JSON.stringify(error.message)
+  }
+}
+
 export function groupIntoIntervalsAscending (data) {
   try {
       const intervalCreator = new IntervalCreator(data)
