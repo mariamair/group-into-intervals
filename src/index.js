@@ -55,7 +55,7 @@ export function groupIntoIntervalsWithColorsAscending (data, colorSchemeId) {
       const intervals = intervalCreator.getIntervals()
       
       const colorMatcher = new IntervalAndColorMatcher(intervals, colorSchemeId)
-      const intervalsWithColors = colorMatcher.getIntervalsWithColors()
+      const intervalsWithColors = colorMatcher.addColorToIntervals()
     
       return intervalsWithColors
   } catch (error) {
@@ -72,7 +72,7 @@ export function groupIntoIntervalsWithColorsDescending (data, colorSchemeId) {
       const intervals = intervalCreator.getIntervals()
       
       const colorMatcher = new IntervalAndColorMatcher(intervals, colorSchemeId)
-      const intervalsWithColors = colorMatcher.getIntervalsWithColors()
+      const intervalsWithColors = colorMatcher.addColorToIntervals()
     
       return intervalsWithColors
   } catch (error) {

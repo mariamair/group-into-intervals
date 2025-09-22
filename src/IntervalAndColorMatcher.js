@@ -15,7 +15,7 @@ export class IntervalAndColorMatcher {
   #numberOfIntervals
   #selectedColors
 
-  constructor (selectedColorSchemeId, intervals) {
+  constructor (intervals, selectedColorSchemeId) {
     const selectedScheme = this.getSelectedColorScheme(selectedColorSchemeId)
     this.#selectedColors = this.convertRgbStringToArray(selectedScheme.rgbValues)
     this.#intervals = intervals
@@ -27,7 +27,7 @@ export class IntervalAndColorMatcher {
     return colorSelector.getSelectedColorScheme(id)
   }
 
-  getIntervalsWithColors () {
+  getColorsForIntervals () {
     const colorCreator = new ColorCreator()
     return colorCreator.getColors(this.#selectedColors, this.#numberOfIntervals)
   }
@@ -45,7 +45,7 @@ export class IntervalAndColorMatcher {
   }
 
   addColorToIntervals () {
-    const colorList = this.getIntervalsWithColors()
+    const colorList = this.getColorsForIntervals()
 
     for (let i = 0; i < this.#intervals.length; i++) {
       this.#intervals[i].color = { hexValue: this.convertToHexValue(colorList[i]), rgbValue: this.convertToRgbString(colorList[i]) }
