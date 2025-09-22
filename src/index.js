@@ -11,47 +11,71 @@ import { IntervalAndColorMatcher } from './IntervalAndColorMatcher.js'
 import { IntervalCreator } from './IntervalCreator.js'
 
 export function displayColorSchemes () {
-  const colorSelector = new ColorSelector()
-  return colorSelector.getColorSchemes()
+  try {
+      const colorSelector = new ColorSelector()
+      return colorSelector.getColorSchemes()
+  } catch (error) {
+    JSON.stringify(error.message)
+  }
 }
 
 export function groupIntoIntervalsAscending (data) {
-  const intervalCreator = new IntervalCreator(data)
-  return intervalCreator.getIntervals()
+  try {
+      const intervalCreator = new IntervalCreator(data)
+      return intervalCreator.getIntervals()
+  } catch (error) {
+    JSON.stringify(error.message)
+  }
 }
 
 export function groupIntoIntervalsDescending (data) {
-  const intervalCreator = new IntervalCreator(data, false)
-  return intervalCreator.getIntervals()
+  try {
+      const intervalCreator = new IntervalCreator(data, false)
+      return intervalCreator.getIntervals()
+  } catch (error) {
+    JSON.stringify(error.message)
+  }
 }
 
 export function groupIntoIntervalsWithColorsAscending (data, colorSchemeId) {
-  const dataValidator = new DataValidator()
-  dataValidator.isValidColorScheme(colorSchemeId)
-
-  const intervalCreator = new IntervalCreator(data)
-  const intervals = intervalCreator.getIntervals()
-  
-  const colorMatcher = new IntervalAndColorMatcher(intervals, colorSchemeId)
-  const intervalsWithColors = colorMatcher.getIntervalsWithColors()
-
-  return intervalsWithColors
+  try {
+      const dataValidator = new DataValidator()
+      dataValidator.isValidColorScheme(colorSchemeId)
+    
+      const intervalCreator = new IntervalCreator(data)
+      const intervals = intervalCreator.getIntervals()
+      
+      const colorMatcher = new IntervalAndColorMatcher(intervals, colorSchemeId)
+      const intervalsWithColors = colorMatcher.getIntervalsWithColors()
+    
+      return intervalsWithColors
+  } catch (error) {
+    JSON.stringify(error.message)
+  }
 }
 
 export function groupIntoIntervalsWithColorsDescending (data, colorSchemeId) {
-  const dataValidator = new DataValidator()
-  dataValidator.isValidColorScheme(colorSchemeId)
-
-  const intervalCreator = new IntervalCreator(data, false)
-  const intervals = intervalCreator.getIntervals()
-  
-  const colorMatcher = new IntervalAndColorMatcher(intervals, colorSchemeId)
-  const intervalsWithColors = colorMatcher.getIntervalsWithColors()
-
-  return intervalsWithColors
+  try {
+      const dataValidator = new DataValidator()
+      dataValidator.isValidColorScheme(colorSchemeId)
+    
+      const intervalCreator = new IntervalCreator(data, false)
+      const intervals = intervalCreator.getIntervals()
+      
+      const colorMatcher = new IntervalAndColorMatcher(intervals, colorSchemeId)
+      const intervalsWithColors = colorMatcher.getIntervalsWithColors()
+    
+      return intervalsWithColors
+  } catch (error) {
+    JSON.stringify(error.message)
+  }
 }
 
 export function getIntervalMetadata (data, isAscending) {
-  const intervalCreator = new IntervalCreator(data, isAscending)
-  return intervalCreator.getIntervalMetadata()
+  try {
+      const intervalCreator = new IntervalCreator(data, isAscending)
+      return intervalCreator.getIntervalMetadata()
+  } catch (error) {
+    JSON.stringify(error.message)
+  }
 }
