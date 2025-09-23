@@ -6,7 +6,6 @@
  */
 
 import { ColorSelector } from './ColorSelector.js'
-import { DataValidator } from './DataValidator.js'
 import { IntervalAndColorMatcher } from './IntervalAndColorMatcher.js'
 import { IntervalCreator } from './IntervalCreator.js'
 
@@ -48,9 +47,6 @@ export function groupIntoIntervalsDescending (data) {
 
 export function groupIntoIntervalsWithColorsAscending (data, colorSchemeId) {
   try {
-      const dataValidator = new DataValidator()
-      dataValidator.isValidColorScheme(colorSchemeId)
-    
       const intervalCreator = new IntervalCreator(data)
       const intervals = intervalCreator.getIntervals()
       
@@ -65,9 +61,6 @@ export function groupIntoIntervalsWithColorsAscending (data, colorSchemeId) {
 
 export function groupIntoIntervalsWithColorsDescending (data, colorSchemeId) {
   try {
-      const dataValidator = new DataValidator()
-      dataValidator.isValidColorScheme(colorSchemeId)
-    
       const intervalCreator = new IntervalCreator(data, false)
       const intervals = intervalCreator.getIntervals()
       

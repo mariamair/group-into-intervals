@@ -8,6 +8,7 @@
 import { ColorConverter } from './ColorConverter.js'
 import { ColorCreator } from './ColorCreator.js'
 import { ColorSelector } from './ColorSelector.js'
+import { DataValidator } from './DataValidator.js'
 
 export class IntervalAndColorMatcher {
   #colorConverter = new ColorConverter()
@@ -23,6 +24,9 @@ export class IntervalAndColorMatcher {
   }
 
   getSelectedColorScheme (id) {
+    const dataValidator = new DataValidator()
+    dataValidator.isValidColorScheme(id)
+
     const colorSelector = new ColorSelector()
     return colorSelector.getSelectedColorScheme(id)
   }
