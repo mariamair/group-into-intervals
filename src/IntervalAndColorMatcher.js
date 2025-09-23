@@ -17,13 +17,13 @@ export class IntervalAndColorMatcher {
   #selectedColors
 
   constructor (intervals, selectedColorSchemeId) {
-    const selectedScheme = this.getSelectedColorScheme(selectedColorSchemeId)
-    this.#selectedColors = this.convertRgbStringToArray(selectedScheme.rgbValues)
+    const selectedScheme = this.#getSelectedColorScheme(selectedColorSchemeId)
+    this.#selectedColors = this.#convertRgbStringToArray(selectedScheme.rgbValues)
     this.#intervals = intervals
     this.#numberOfIntervals = intervals.length
   }
 
-  getSelectedColorScheme (id) {
+  #getSelectedColorScheme (id) {
     const dataValidator = new DataValidator()
     dataValidator.isValidColorScheme(id)
 
@@ -31,28 +31,28 @@ export class IntervalAndColorMatcher {
     return colorSelector.getSelectedColorScheme(id)
   }
 
-  getColorsForIntervals () {
+  #getColorsForIntervals () {
     const colorCreator = new ColorCreator()
     return colorCreator.getColors(this.#selectedColors, this.#numberOfIntervals)
   }
 
-  convertRgbStringToArray (rgbStringWithMultipleValues) {
+  #convertRgbStringToArray (rgbStringWithMultipleValues) {
     return this.#colorConverter.convertMultipleRgbStringsToArray(rgbStringWithMultipleValues)
   }
 
-  convertToRgbString (rgbArray) {
+  #convertToRgbString (rgbArray) {
     return this.#colorConverter.convertRgbArrayToString(rgbArray)
   }
 
-  convertToHexValue (rgbArray) {
+  #convertToHexValue (rgbArray) {
     return this.#colorConverter.convertRgbArraytoHexValue(rgbArray)
   }
 
   addColorToIntervals () {
-    const colorList = this.getColorsForIntervals()
+    const colorList = this.#getColorsForIntervals()
 
     for (let i = 0; i < this.#intervals.length; i++) {
-      this.#intervals[i].color = { hexValue: this.convertToHexValue(colorList[i]), rgbValue: this.convertToRgbString(colorList[i]) }
+      this.#intervals[i].color = { hexValue: this.#convertToHexValue(colorList[i]), rgbValue: this.#convertToRgbString(colorList[i]) }
     }
     return this.#intervals
   }
