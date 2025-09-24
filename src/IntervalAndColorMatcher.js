@@ -24,15 +24,12 @@ export class IntervalAndColorMatcher {
   }
 
   /**
-   * Fetch the color scheme that the user selected, if the color scheme id is valid.
-   * 
+   * Fetch the color scheme that the user selected.
+   *
    * @param {number} id - The color scheme id.
-   * @returns {object} - An object containing the color scheme.
+   * @returns {object} - An object specifying the color scheme.
    */
   #getSelectedColorScheme (id) {
-    const dataValidator = new DataValidator()
-    dataValidator.isValidColorScheme(id)
-
     const colorSelector = new ColorSelector()
     return colorSelector.getSelectedColorScheme(id)
   }
