@@ -23,14 +23,14 @@ export class ColorConverter {
   /**
    * Convert multiple RGB strings to a nested array of RGB values.
    * 
-   * @param {string[]} rgbStringWithMultipleValues - An array containing multiple RGB value strings.
+   * @param {string[]} rgbValueStrings - An array containing multiple RGB value strings.
    * @returns {number{}} - An array containing arrays with numbers representing RGB values.
    */
-  convertMultipleRgbStringsToArray (rgbStringWithMultipleValues) {
+  convertMultipleRgbStringsToArray (rgbValueStrings) {
     const rgbArray = []
 
-    for(const color of rgbStringWithMultipleValues) {
-      rgbArray.push(this.convertRgbStringToArray(color))
+    for(const rgbValueString of rgbValueStrings) {
+      rgbArray.push(this.convertRgbStringToArray(rgbValueString))
     }
 
     return rgbArray
