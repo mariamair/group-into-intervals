@@ -18,11 +18,17 @@ export class IntervalAndColorMatcher {
 
   constructor (intervals, selectedColorSchemeId) {
     const selectedScheme = this.#getSelectedColorScheme(selectedColorSchemeId)
-    this.#selectedColors = this.#convertRgbStringToArray(selectedScheme.rgbValues)
+    this.#selectedColors = this.#colorConverter.convertMultipleRgbStringsToArray(selectedScheme.rgbValues)
     this.#intervals = intervals
     this.#numberOfIntervals = intervals.length
   }
 
+  /**
+   * Fetch the color scheme that the user selected, if the color scheme id is valid.
+   * 
+   * @param {number} id - The color scheme id.
+   * @returns {object} - An object containing the color scheme.
+   */
   #getSelectedColorScheme (id) {
     const dataValidator = new DataValidator()
     dataValidator.isValidColorScheme(id)
@@ -31,28 +37,26 @@ export class IntervalAndColorMatcher {
     return colorSelector.getSelectedColorScheme(id)
   }
 
+  /**
+   * Create more colors, based on the selected color scheme, to match the number of intervals.
+   *
+   * @returns {number[]} - An array containing one color for each interval.
+   */
   #getColorsForIntervals () {
     const colorCreator = new ColorCreator()
     return colorCreator.getColors(this.#selectedColors, this.#numberOfIntervals)
   }
 
-  #convertRgbStringToArray (rgbStringWithMultipleValues) {
-    return this.#colorConverter.convertMultipleRgbStringsToArray(rgbStringWithMultipleValues)
-  }
-
-  #convertToRgbString (rgbArray) {
-    return this.#colorConverter.convertRgbArrayToString(rgbArray)
-  }
-
-  #convertToHexValue (rgbArray) {
-    return this.#colorConverter.convertRgbArraytoHexValue(rgbArray)
-  }
-
+  /**
+   * Add a color to each interval.
+   *
+   * @returns {object} - The interval object expanded with colors. 
+   */
   addColorToIntervals () {
     const colorList = this.#getColorsForIntervals()
 
     for (let i = 0; i < this.#intervals.length; i++) {
-      this.#intervals[i].color = { hexValue: this.#convertToHexValue(colorList[i]), rgbValue: this.#convertToRgbString(colorList[i]) }
+      this.#intervals[i].color = { hexValue: this.#colorConverter.convertRgbArraytoHexValue(colorList[i]), rgbValue: this.#colorConverter.convertRgbArrayToString(colorList[i]) }
     }
     return this.#intervals
   }
