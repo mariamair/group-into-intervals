@@ -8,7 +8,6 @@
 import { ColorConverter } from './ColorConverter.js'
 import { ColorCreator } from './ColorCreator.js'
 import { ColorSelector } from './ColorSelector.js'
-import { DataValidator } from './DataValidator.js'
 
 export class IntervalAndColorMatcher {
   #colorConverter = new ColorConverter()
