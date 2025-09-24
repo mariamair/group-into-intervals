@@ -9,6 +9,11 @@ import { ColorSelector } from './ColorSelector.js'
 import { IntervalAndColorMatcher } from './IntervalAndColorMatcher.js'
 import { IntervalCreator } from './IntervalCreator.js'
 
+/**
+ * Get all color schemes.
+ *
+ * @returns {object[]} - An array of objects in JSON format specifying the color schemes.
+ */
 export function displayColorSchemes () {
   try {
       const colorSelector = new ColorSelector()
@@ -18,6 +23,12 @@ export function displayColorSchemes () {
   }
 }
 
+/**
+ * Get a specific color scheme.
+ *
+ * @param {number} colorSchemeId - The number of the requested color scheme.
+ * @returns {object} - An object in JSON format specifying the color scheme.
+ */
 export function displayColorScheme (colorSchemeId) {
   try {
       const colorSelector = new ColorSelector()
@@ -27,6 +38,12 @@ export function displayColorScheme (colorSchemeId) {
   }
 }
 
+/**
+ * Get the input data grouped in ascending intervals.
+ *
+ * @param {number[]} data - An array of numbers.
+ * @returns {object} - An object in JSON format containing the intervals.
+ */
 export function groupIntoIntervalsAscending (data) {
   try {
       const intervalCreator = new IntervalCreator(data)
@@ -36,6 +53,12 @@ export function groupIntoIntervalsAscending (data) {
   }
 }
 
+/**
+ * Get the input data grouped in descending intervals.
+ *
+ * @param {number[]} data - An array of numbers.
+ * @returns {object} - An object in JSON format containing the intervals.
+ */
 export function groupIntoIntervalsDescending (data) {
   try {
       const intervalCreator = new IntervalCreator(data, false)
@@ -45,6 +68,13 @@ export function groupIntoIntervalsDescending (data) {
   }
 }
 
+/**
+ * Get the input data grouped in ascending intervals with a color specified for each interval.
+ * 
+ * @param {number[]} data - An array of numbers.
+ * @param {number} colorSchemeId - The id of the requested color scheme.
+ * @returns {object} - An object in JSON format containing the intervals with colors.
+ */
 export function groupIntoIntervalsWithColorsAscending (data, colorSchemeId) {
   try {
       const intervalCreator = new IntervalCreator(data)
@@ -59,6 +89,13 @@ export function groupIntoIntervalsWithColorsAscending (data, colorSchemeId) {
   }
 }
 
+/**
+ * Get the input data grouped in descending intervals with a color specified for each interval.
+ *
+ * @param {number[]} data - An array of numbers.
+ * @param {number} colorSchemeId - The id of the requested color scheme.
+ * @returns {object} - An object in JSON format containing the intervals with colors.
+ */
 export function groupIntoIntervalsWithColorsDescending (data, colorSchemeId) {
   try {
       const intervalCreator = new IntervalCreator(data, false)
@@ -73,6 +110,13 @@ export function groupIntoIntervalsWithColorsDescending (data, colorSchemeId) {
   }
 }
 
+/**
+ * Get the metadata that is used for grouping the data into intervals.
+ *
+ * @param {number[]} data - An array of numbers
+ * @param {boolean} isAscending - True for ascending, false for descending sorting.
+ * @returns {object} - An object in JSon format containing the metadata.
+ */
 export function getIntervalMetadata (data, isAscending) {
   try {
       const intervalCreator = new IntervalCreator(data, isAscending)
