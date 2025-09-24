@@ -1,5 +1,5 @@
 /** 
- * This class contains methods to process the data input.
+ * This class contains methods to process the data input and group the data into intervals.
  * 
  * @author Maria Mair <mm225mz@student.lnu.se>
  * @version 0.0.1
@@ -24,12 +24,22 @@ export class IntervalCreator {
     this.#setMetaData()
   }
 
+  /**
+   * Get the data grouped into intervals.
+   * 
+   * @returns {object} - An object containing the intervals.
+   */
   getIntervals () {
     this.#defineIntervalBoundaries()
     this.#fillIntervalsWithData()
     return this.#intervals
   }
 
+  /**
+   * Get the metadata that is used for grouping the data into intervals.
+   *
+   * @returns {object} - An object containing the metadata.
+   */
   getIntervalMetadata () {
     return {
       minValue: this.#isAscending ? this.#minValue : this.#maxValue,
@@ -40,10 +50,20 @@ export class IntervalCreator {
     }
   }
 
+  /**
+   * Set the sorting order.
+   *
+   * @param {boolean} isAscending - A boolean specifying the sorting order.
+   */
   #setSortingOrder (isAscending) {
     this.#isAscending = isAscending
   }
 
+  /**
+   * Set the data that will be used for the intervals and validate it before processing.
+   *
+   * @param {number[]} originalData - An array of numbers.
+   */
   #setData (originalData) {
     this.#validateData(originalData)
 
@@ -53,6 +73,11 @@ export class IntervalCreator {
     this.#sortedData = this.#isAscending ? this.#sortDataAscending() : this.#sortDataDescending()
   }
 
+  /**
+   * Validate the input data.
+   *
+   * @param {number[]} originalData - An array of numbers.
+   */
   #validateData (originalData) {
     const dataValidator = new DataValidator()
     if (!dataValidator.isArray(originalData)) {
@@ -76,6 +101,9 @@ export class IntervalCreator {
     return this.#denseData.sort((a,b) => b - a)
   }
 
+  /**
+   * Set the metadata used for defining the intervals.
+   */
   #setMetaData () {
     this.#setMaxAndMinValue()
     this.#calculateRange()
@@ -92,12 +120,16 @@ export class IntervalCreator {
     this.#range = Math.abs(this.#maxValue - this.#minValue)
   }
 
-  // Calculate the appropriate number of intervals using Sturges' formula (1 + 3.322 * log(number of data points))
+  /**
+   * Calculate the appropriate number of intervals using Sturges' formula (1 + 3.322 * log(number of data points))
+   */
   #calculateNumberOfIntervals () {
     this.#numberOfIntervals = Math.round(1 + 3.322 * Math.log10(this.#sortedData.length))
   }
 
-  // Calculate the interval width (range / number of intervals)
+  /**
+   * Calculate the interval width (range / number of intervals)
+   */
   #calculateIntervalWidth () {
     let intervalWidth = Math.round(this.#range / this.#numberOfIntervals)
 
@@ -112,19 +144,30 @@ export class IntervalCreator {
     this.#intervals = this.#isAscending ? this.#defineIntervalBoundariesAscending(this.#numberOfIntervals, this.#intervalWidth) : this.#defineIntervalBoundariesDescending(this.#numberOfIntervals, this.#intervalWidth)
   }
 
-  #isRangeWithinIntervals(range, numberOfIntervals, intervalWidth) {
-    if (range < numberOfIntervals * intervalWidth) {
+  /**
+   * Check that the number of intervals multiplied with the interval width covers the range of the dataset.
+   *
+   * @param {number} intervalWidth - The intervald width.
+   * @returns 
+   */
+  #isRangeWithinIntervals(intervalWidth) {
+    if (this.#range < this.#numberOfIntervals * intervalWidth) {
       return true
     }
     return false
   }
 
-  #defineIntervalBoundariesAscending(numberOfIntervals, intervalWidth) {
+  /**
+   * Define the lower and upper interval boundaries for ascending sorting.
+   * 
+   * @returns {object[]} - An array containing the intervals with their boundaries.
+   */
+  #defineIntervalBoundariesAscending() {
     const intervalBoundaries = []
 
     let lowerBoundary = this.#minValue
-    for (let i = 0; i < numberOfIntervals; i++) {
-      const upperBoundary = lowerBoundary + intervalWidth
+    for (let i = 0; i < this.#numberOfIntervals; i++) {
+      const upperBoundary = lowerBoundary + this.#intervalWidth
       intervalBoundaries.push({ lowerBoundary, upperBoundary: upperBoundary - 1 })
       lowerBoundary = upperBoundary
     }
@@ -132,12 +175,17 @@ export class IntervalCreator {
     return intervalBoundaries
   }
 
-  #defineIntervalBoundariesDescending(numberOfIntervals, intervalWidth) {
+  /**
+   * Define the lower and upper interval boundaries for descending sorting.
+   * 
+   * @returns {object[]} - An array containing the intervals with their boundaries.
+   */
+  #defineIntervalBoundariesDescending() {
     const intervalBoundaries = []
 
     let upperBoundary = this.#minValue
-    for (let i = 0; i < numberOfIntervals; i++) {
-      const lowerBoundary = upperBoundary - intervalWidth
+    for (let i = 0; i < this.#numberOfIntervals; i++) {
+      const lowerBoundary = upperBoundary - this.#intervalWidth
       intervalBoundaries.push({ upperBoundary, lowerBoundary: lowerBoundary + 1 })
       upperBoundary = lowerBoundary
     }
@@ -145,6 +193,9 @@ export class IntervalCreator {
     return intervalBoundaries
   }
 
+  /**
+   * Fill the defined intervals with the data that lies between their boundaries. 
+   */
   #fillIntervalsWithData() {
     for (const interval of this.#intervals) {
       interval.data = []
