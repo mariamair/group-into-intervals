@@ -104,11 +104,10 @@ getIntervalMetadata(data, isAscending)
 ## Color schemes
 | Id | Name | Color 1 | Color 2 | Color 3 |
 |----|------|---------|---------|---------|
-| 1 | red, violet, blue | ![red](./docs/color-red.png)| ![violet](./docs/color-violet.png) | ![blue](./docs/color-blue.png) | 
-| ^ | ^ | (190, 32, 32) | (117, 50, 168) | (26, 2, 240) | 
-| 2 | red, yellow, blue | ![red](./docs/color-red.png) (190, 32, 32) | ![yellow](./docs/color-yellow.png) (214, 219, 66) | ![blue](./docs/color-blue.png) (26, 2, 240) | 
-| 3 | violet, yellow, blue | ![violet](./docs/color-violet.png) (117, 50, 168) | ![yellow](./docs/color-yellow.png) (214, 219, 66) | ![blue](./docs/color-blue.png) (26, 2, 240) | 
-| 4 | white, light green, dark green | ![white](./docs/color-white.png) (255, 255, 255) | ![light green](./docs/color-light-green.png) (94, 193, 56) | ![dark green](./docs/color-dark-green.png) (58, 109, 37) | 
+| 1 | red, violet, blue | ![red](./docs/color-red.png)<br>(190, 32, 32) | ![violet](./docs/color-violet.png)<br>(117, 50, 168) | ![blue](./docs/color-blue.png)<br>(26, 2, 240) | 
+| 2 | red, yellow, blue | ![red](./docs/color-red.png)<br>(190, 32, 32) | ![yellow](./docs/color-yellow.png)<br>(214, 219, 66) | ![blue](./docs/color-blue.png)<br>(26, 2, 240) | 
+| 3 | violet, yellow, blue | ![violet](./docs/color-violet.png)<br>(117, 50, 168) | ![yellow](./docs/color-yellow.png)<br>(214, 219, 66) | ![blue](./docs/color-blue.png)<br>(26, 2, 240) | 
+| 4 | white, light green, dark green | ![white](./docs/color-white.png)<br>(255, 255, 255) | ![light green](./docs/color-light-green.png)<br>(94, 193, 56) | ![dark green](./docs/color-dark-green.png)<br>(58, 109, 37) | 
 
 
 ## Technical information
