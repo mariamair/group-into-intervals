@@ -2,7 +2,7 @@
 
 A tool that supports statistical analysis of data by grouping data points into intervals.   
 - Input an array of numbers and get it grouped for a quick and lightweight analysis.   
-- Choose one of four color schemes to go with the intervals and use the result to visualize your data. 
+- Choose one of [four color schemes](#color-schemes) to go with the intervals and use the result to visualize your data. 
 
 
 ## Statistical background
@@ -61,13 +61,12 @@ Will return this object:
 ### Example for usage of output
 Use the output to easily visualize your data, e.g. displaying it as intervals or creating a histogram of your data.  
 
-#### Visualize your data as intervals  
 ![Output as intervals](./docs/ModuleOutput_Intervals.png)
 
-#### Visualize your data as histogram 
 ![Output as histogram](./docs/ModuleOutput_Histogram.png)
 
 ## API
+
 ### Display all color schemes
 ```js
 displayColorSchemes()
@@ -97,17 +96,28 @@ groupIntoIntervalsWithColorsDescending(data, colorSchemeId)
 ### Get interval metadata
 Returns the metadata that will be used when your data is grouped into intervals, e.g. range, number of intervals and interval width.   
 
-- Set as `isAscending = true` if the data should be sorted ascending
-- Set as `isAscending = false` if the data should be sorted descending
+- Set `isAscending = true` if the data should be sorted ascending
+- Set `isAscending = false` if the data should be sorted descending
 ```js
 getIntervalMetadata(data, isAscending)
 ```
+## Color schemes
+| Id | Name | Color 1 | Color 2 | Color 3 |
+|----|------|---------|---------|---------|
+| 1 | red, violet, blue | ![red](./docs/color-red.png)| ![violet](./docs/color-violet.png) | ![blue](./docs/color-blue.png) | 
+| ^ | ^ | (190, 32, 32) | (117, 50, 168) | (26, 2, 240) | 
+| 2 | red, yellow, blue | ![red](./docs/color-red.png) (190, 32, 32) | ![yellow](./docs/color-yellow.png) (214, 219, 66) | ![blue](./docs/color-blue.png) (26, 2, 240) | 
+| 3 | violet, yellow, blue | ![violet](./docs/color-violet.png) (117, 50, 168) | ![yellow](./docs/color-yellow.png) (214, 219, 66) | ![blue](./docs/color-blue.png) (26, 2, 240) | 
+| 4 | white, light green, dark green | ![white](./docs/color-white.png) (255, 255, 255) | ![light green](./docs/color-light-green.png) (94, 193, 56) | ![dark green](./docs/color-dark-green.png) (58, 109, 37) | 
+
 
 ## Technical information
-The module was developed and tested for Node version 24.1.0.
+The module was developed with and tested for Node version 24.1.0.
 
 ## Test report summary
 For a summary of the latest unit test run, see [the summary of test results](https://github.com/mariamair/test-group-into-intervals/blob/main/reports/summary.md)
+
+For more information about the tests, see [the test report](./docs/testreport.md)
 
 ## Versions and releases
 Version 1.0.0, released 2025-09-30.
