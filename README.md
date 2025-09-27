@@ -6,18 +6,18 @@ A tool that supports statistical analysis of data by grouping data points into i
 
 
 ## Statistical background
-The number of intervals (a.k.a. classes) is calculated with Sturges' formula `k = 1 + 3.322 * log(number of data points)`.  
-The interval width (or class width) is calculated by dividing the range of the dataset with the number of intervals. In case the interval width multiplied with the number of intervals is too small to cover the range ot the dataset, the interval width is increased by 1 until the range is covered.   
+The **number of intervals** (a.k.a. _classes_ or _bins_) is calculated with Sturges' formula `k = 1 + 3.322 * log10(number of data points)`.  
+The **interval width** (or _class width_) is calculated by dividing the range of the dataset with the number of intervals. In case the interval width multiplied with the number of intervals is too small to cover the range ot the dataset, the interval width is increased by 1 until the range is covered.   
 
 For more information about Sturges' rule and criticism of it, see [Wikipedia](https://en.wikipedia.org/wiki/Sturges%27s_rule).
 
 ## Installation
-To add the module to your application run
+To add the module to your application, run:
 ```
 git submodule add https://github.com/mariamair/group-into-intervals
 ```
 
-To get the latest update of the module run
+To get the latest update of the module, run:
 ```
 git submodule update --remote
 ```
@@ -58,38 +58,51 @@ Will return this object:
 ]
 ```
 
-### Example for usage of output
+### Examples for usage of output
 Use the output to easily visualize your data, e.g. displaying it as intervals or creating a histogram of your data.  
 
+#### Example of using color scheme 3 and displaying the resulting intervals
 ![Output as intervals](./docs/ModuleOutput_Intervals.png)
-
+---
+#### Example of using color scheme 1 and displaying the result as histogram
 ![Output as histogram](./docs/ModuleOutput_Histogram.png)
+---
 
 ## API
 
-### Display all color schemes
+### Fetch color schemes
+You can fetch all color schemes or a specific one.   
+   
+To get all color schemes, use:
+
 ```js
-displayColorSchemes()
+getAllColorSchemes()
 ```
-### Display specific color scheme
+
+To fetch information about a specific color scheme, call this function with one of the [color scheme ID's](#color-schemes):
 ```js
-displayColorScheme(colorSchemeId)
+getColorScheme(colorSchemeId)
 ```
-### Get ascending intervals 
-- without color:
+### Get intervals (without colors)
+Get ascending intervals of your data:
 ```js
 groupIntoIntervalsAscending(data)
 ```
-- with color:
-```js
-groupIntoIntervalsWithColorsAscending(data, colorSchemeId)
-```
-### Get descending intervals 
-- without color:
+Get descending intervals of your data:
 ```js
 groupIntoIntervalsDescending(data)
 ```
-- with color:
+
+### Get intervals (with colors)
+Get the intervals together with a color for each interval. Specify the ID of the color scheme you want to use. Based on that scheme, the function will add as much colors as needed to give each interval its own color.   
+_Please note: If your data results in more than 9 intervals, the created colors might be hard to distinguish visually._
+
+Get ascending intervals with colors:
+```js
+groupIntoIntervalsWithColorsAscending(data, colorSchemeId)
+```
+
+Get descending intervals with colors:
 ```js
 groupIntoIntervalsWithColorsDescending(data, colorSchemeId)
 ```
@@ -101,8 +114,10 @@ Returns the metadata that will be used when your data is grouped into intervals,
 ```js
 getIntervalMetadata(data, isAscending)
 ```
+---
+   
 ## Color schemes
-| Id | Name | Color 1 | Color 2 | Color 3 |
+| ID | Name | Color 1 | Color 2 | Color 3 |
 |----|------|---------|---------|---------|
 | 1 | red, violet, blue | ![red](./docs/color-red.png)<br>(190, 32, 32) | ![violet](./docs/color-violet.png)<br>(117, 50, 168) | ![blue](./docs/color-blue.png)<br>(26, 2, 240) | 
 | 2 | red, yellow, blue | ![red](./docs/color-red.png)<br>(190, 32, 32) | ![yellow](./docs/color-yellow.png)<br>(214, 219, 66) | ![blue](./docs/color-blue.png)<br>(26, 2, 240) | 
@@ -114,9 +129,9 @@ getIntervalMetadata(data, isAscending)
 The module was developed with and tested for Node version 24.1.0.
 
 ## Test report summary
-For a summary of the latest unit test run, see [the summary of test results](https://github.com/mariamair/test-group-into-intervals/blob/main/reports/summary.md)
+For a summary of the latest unit test run, see [the summary of test results](https://github.com/mariamair/test-group-into-intervals/blob/main/reports/summary.md).
 
-For more information about the tests, see [the test report](./docs/testreport.md)
+For more information about the tests, see [the test report](./docs/testreport.md).
 
 ## Versions and releases
 Version 1.0.0, released 2025-09-30.
