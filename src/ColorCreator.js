@@ -8,8 +8,14 @@
 export class ColorCreator {
   #colors
 
-  // Setting the default to 9 because more values give colors that are too similar.
-  getColors (colors, numberOfIntervals = 9) {
+  /**
+   * Create more colors if there are more intervals than colors in the color scheme. 
+   *
+   * @param {number[]} colors - An array specifying RGB color values.
+   * @param {number} numberOfIntervals - The number of intervals.
+   * @returns {number[]} - An array specifying RGB color values.
+   */
+  getColors (colors, numberOfIntervals) {
     this.#setStartingColors(colors)
     while (this.#hasMoreIntervalsThanColors(numberOfIntervals)){
       this.#createColors()
@@ -17,10 +23,19 @@ export class ColorCreator {
     return this.#colors
   }
 
+  /** 
+   * Set received color scheme colors as starting colors.
+   */
   #setStartingColors (colors) {
     this.#colors = colors
   }
 
+  /**
+   * Check if there are more interval than colors.
+   *
+   * @param {number} numberOfIntervals - The number of intervals.
+   * @returns {boolean} - True if there are more intervals than colors, false otherwise.
+   */
   #hasMoreIntervalsThanColors (numberOfIntervals) {
     if (numberOfIntervals > this.#colors.length) {
       return true
@@ -28,6 +43,11 @@ export class ColorCreator {
     return false
   }
 
+  /**
+   * Create color pairs from the existing colors.
+   *
+   * @returns {number[][]} An array containing pairs of RGB value arrays.
+   */
   #createColorPairs () {
     const colorPairs = []
     for (let i = 0, j = 1; i < this.#colors.length - 1; i++, j++) {
@@ -36,6 +56,9 @@ export class ColorCreator {
     return colorPairs
   }
 
+  /**
+   * Create new colors from the existing ones.
+   */
   #createColors () {
     const colorList = []
     const colorPairs = this.#createColorPairs()
@@ -54,6 +77,12 @@ export class ColorCreator {
     this.#colors = colorList
   }
 
+/**
+ * Calculate the RGB value in between two given RGB values.
+ * 
+ * @param {number[][]} colorPair - An array containing two arrays of RGB values.
+ * @returns {number[]} - An array containing a new RGB value.
+ */
   #calculateMiddleRgbValue (colorPair) {
     const middleRgbValue = []
     for (let i = 0; i < 3; i++) {
