@@ -30,7 +30,7 @@ export class IntervalAndColorMatcher {
    */
   #getSelectedColorScheme (id) {
     const colorSelector = new ColorSelector()
-    return colorSelector.getColorScheme(id)
+    return colorSelector.getSelectedColorScheme(id)
   }
 
   /**
@@ -52,7 +52,9 @@ export class IntervalAndColorMatcher {
     const colorList = this.#getColorsForIntervals()
 
     for (let i = 0; i < this.#intervals.length; i++) {
-      this.#intervals[i].color = { hexValue: this.#colorConverter.convertRgbArraytoHexValue(colorList[i]), rgbValue: this.#colorConverter.convertRgbArrayToString(colorList[i]) }
+      this.#intervals[i].color = { 
+        hexValue: this.#colorConverter.convertRgbArraytoHexValue(colorList[i]), 
+        rgbValue: this.#colorConverter.convertRgbArrayToString(colorList[i]) }
     }
     return this.#intervals
   }

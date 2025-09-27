@@ -25,7 +25,7 @@ export class ColorSelector {
       id: 4, name: 'white, light green, dark green',
       hexValues: ['#fff', '#5ec138', '#3a6d25'], 
       rgbValues: ['rgb(255, 255, 255)', 'rgb(94, 193, 56)', 'rgb(58, 109, 37)'] 
-  }]
+    }]
 
   /**
    * Get all color schemes.

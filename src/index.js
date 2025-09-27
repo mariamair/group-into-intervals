@@ -16,8 +16,8 @@ import { IntervalCreator } from './IntervalCreator.js'
  */
 export function getAllColorSchemes () {
   try {
-      const colorSelector = new ColorSelector()
-      return JSON.stringify(colorSelector.getAllColorSchemes())
+    const colorSelector = new ColorSelector()
+    return JSON.stringify(colorSelector.getAllColorSchemes())
   } catch (error) {
     return JSON.stringify(error.message)
   }
@@ -31,8 +31,8 @@ export function getAllColorSchemes () {
  */
 export function getColorScheme (colorSchemeId) {
   try {
-      const colorSelector = new ColorSelector()
-      return JSON.stringify(colorSelector.getColorScheme(colorSchemeId))
+    const colorSelector = new ColorSelector()
+    return JSON.stringify(colorSelector.getColorScheme(colorSchemeId))
   } catch (error) {
     return JSON.stringify(error.message)
   }
@@ -46,8 +46,8 @@ export function getColorScheme (colorSchemeId) {
  */
 export function groupIntoIntervalsAscending (data) {
   try {
-      const intervalCreator = new IntervalCreator(data)
-      return JSON.stringify(intervalCreator.getIntervals())
+    const intervalCreator = new IntervalCreator(data)
+    return JSON.stringify(intervalCreator.getIntervals())
   } catch (error) {
     return JSON.stringify(error.message)
   }
@@ -61,8 +61,8 @@ export function groupIntoIntervalsAscending (data) {
  */
 export function groupIntoIntervalsDescending (data) {
   try {
-      const intervalCreator = new IntervalCreator(data, false)
-      return JSON.stringify(intervalCreator.getIntervals())
+    const intervalCreator = new IntervalCreator(data, false)
+    return JSON.stringify(intervalCreator.getIntervals())
   } catch (error) {
     return JSON.stringify(error.message)
   }
@@ -77,13 +77,13 @@ export function groupIntoIntervalsDescending (data) {
  */
 export function groupIntoIntervalsWithColorsAscending (data, colorSchemeId) {
   try {
-      const intervalCreator = new IntervalCreator(data)
-      const intervals = intervalCreator.getIntervals()
+    const intervalCreator = new IntervalCreator(data)
+    const intervals = intervalCreator.getIntervals()
       
-      const colorMatcher = new IntervalAndColorMatcher(intervals, colorSchemeId)
-      const intervalsWithColors = colorMatcher.addColorToIntervals()
+    const colorMatcher = new IntervalAndColorMatcher(intervals, colorSchemeId)
+    const intervalsWithColors = colorMatcher.addColorToIntervals()
     
-      return JSON.stringify(intervalsWithColors)
+    return JSON.stringify(intervalsWithColors)
   } catch (error) {
     return JSON.stringify(error.message)
   }
@@ -98,13 +98,13 @@ export function groupIntoIntervalsWithColorsAscending (data, colorSchemeId) {
  */
 export function groupIntoIntervalsWithColorsDescending (data, colorSchemeId) {
   try {
-      const intervalCreator = new IntervalCreator(data, false)
-      const intervals = intervalCreator.getIntervals()
+    const intervalCreator = new IntervalCreator(data, false)
+    const intervals = intervalCreator.getIntervals()
       
-      const colorMatcher = new IntervalAndColorMatcher(intervals, colorSchemeId)
-      const intervalsWithColors = colorMatcher.addColorToIntervals()
+    const colorMatcher = new IntervalAndColorMatcher(intervals, colorSchemeId)
+    const intervalsWithColors = colorMatcher.addColorToIntervals()
     
-      return JSON.stringify(intervalsWithColors)
+    return JSON.stringify(intervalsWithColors)
   } catch (error) {
     return JSON.stringify(error.message)
   }
@@ -119,8 +119,8 @@ export function groupIntoIntervalsWithColorsDescending (data, colorSchemeId) {
  */
 export function getIntervalMetadata (data, isAscending) {
   try {
-      const intervalCreator = new IntervalCreator(data, isAscending)
-      return JSON.stringify(intervalCreator.getIntervalMetadata())
+    const intervalCreator = new IntervalCreator(data, isAscending)
+    return JSON.stringify(intervalCreator.getIntervalMetadata())
   } catch (error) {
     return JSON.stringify(error.message)
   }

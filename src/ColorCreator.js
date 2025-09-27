@@ -77,12 +77,12 @@ export class ColorCreator {
     this.#colors = colorList
   }
 
-/**
- * Calculate the RGB value in between two given RGB values.
- * 
- * @param {number[][]} colorPair - An array containing two arrays of RGB values.
- * @returns {number[]} - An array containing a new RGB value.
- */
+  /**
+   * Calculate the RGB value in between two given RGB values.
+   * 
+   * @param {number[][]} colorPair - An array containing two arrays of RGB values.
+   * @returns {number[]} - An array containing a new RGB value.
+   */
   #calculateMiddleRgbValue (colorPair) {
     const middleRgbValue = []
     for (let i = 0; i < 3; i++) {
