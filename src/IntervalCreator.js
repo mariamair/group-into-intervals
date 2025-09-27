@@ -133,7 +133,7 @@ export class IntervalCreator {
   #calculateIntervalWidth () {
     let intervalWidth = Math.round(this.#range / this.#numberOfIntervals)
 
-    while (!this.#isRangeWithinIntervals(this.#range, this.#numberOfIntervals, intervalWidth )) {
+    while (!this.#isRangeWithinIntervals(intervalWidth)) {
       intervalWidth++
     }
 
@@ -147,8 +147,8 @@ export class IntervalCreator {
   /**
    * Check that the number of intervals multiplied with the interval width covers the range of the dataset.
    *
-   * @param {number} intervalWidth - The intervald width.
-   * @returns 
+   * @param {number} intervalWidth - The interval width.
+   * @returns {boolean} - True if the range is covered, false otherwise.
    */
   #isRangeWithinIntervals(intervalWidth) {
     if (this.#range < this.#numberOfIntervals * intervalWidth) {
