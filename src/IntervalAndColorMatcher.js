@@ -30,7 +30,7 @@ export class IntervalAndColorMatcher {
    */
   #getSelectedColorScheme (id) {
     const colorSelector = new ColorSelector()
-    return colorSelector.getSelectedColorScheme(id)
+    return colorSelector.getColorScheme(id)
   }
 
   /**

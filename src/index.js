@@ -14,10 +14,10 @@ import { IntervalCreator } from './IntervalCreator.js'
  *
  * @returns {object[]} - An array of objects in JSON format specifying the color schemes.
  */
-export function displayColorSchemes () {
+export function getAllColorSchemes () {
   try {
       const colorSelector = new ColorSelector()
-      return JSON.stringify(colorSelector.getColorSchemes())
+      return JSON.stringify(colorSelector.getAllColorSchemes())
   } catch (error) {
     return JSON.stringify(error.message)
   }
@@ -29,10 +29,10 @@ export function displayColorSchemes () {
  * @param {number} colorSchemeId - The number of the requested color scheme.
  * @returns {object} - An object in JSON format specifying the color scheme.
  */
-export function displayColorScheme (colorSchemeId) {
+export function getColorScheme (colorSchemeId) {
   try {
       const colorSelector = new ColorSelector()
-      return JSON.stringify(colorSelector.getSelectedColorScheme(colorSchemeId))
+      return JSON.stringify(colorSelector.getColorScheme(colorSchemeId))
   } catch (error) {
     return JSON.stringify(error.message)
   }

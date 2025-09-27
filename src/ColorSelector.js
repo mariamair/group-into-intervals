@@ -32,7 +32,7 @@ export class ColorSelector {
    * 
    * @returns {object[]} - An array containing all color scheme objects.
    */
-  getColorSchemes () {
+  getAllColorSchemes () {
     return this.#colorSchemes
   }
 
@@ -42,7 +42,7 @@ export class ColorSelector {
    * @param {number} id - A color scheme id.
    * @returns {object} - An object specifying the color scheme.
    */
-  getSelectedColorScheme (id) {
+  getColorScheme (id) {
     const dataValidator = new DataValidator()
     dataValidator.isValidColorScheme(id)
 

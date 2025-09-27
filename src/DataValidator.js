@@ -27,7 +27,7 @@ export class DataValidator {
 
   isValidColorScheme (selectedColorScheme) {
     const colorSelector = new ColorSelector()
-    const colorSchemes = colorSelector.getColorSchemes()
+    const colorSchemes = colorSelector.getAllColorSchemes()
     let validId = false
     for (const scheme of colorSchemes) {
       if (scheme.id === selectedColorScheme) {
