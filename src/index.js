@@ -44,7 +44,7 @@ export function getColorScheme (colorSchemeId) {
  * @param {number[]} data - An array of numbers.
  * @returns {object} - An object in JSON format containing the intervals.
  */
-export function groupIntoIntervalsAscending (data) {
+export function getAscendingIntervals (data) {
   try {
     const intervalCreator = new IntervalCreator(data)
     return JSON.stringify(intervalCreator.getIntervals())
@@ -59,7 +59,7 @@ export function groupIntoIntervalsAscending (data) {
  * @param {number[]} data - An array of numbers.
  * @returns {object} - An object in JSON format containing the intervals.
  */
-export function groupIntoIntervalsDescending (data) {
+export function getDescendingIntervals (data) {
   try {
     const intervalCreator = new IntervalCreator(data, false)
     return JSON.stringify(intervalCreator.getIntervals())
@@ -75,7 +75,7 @@ export function groupIntoIntervalsDescending (data) {
  * @param {number} colorSchemeId - The id of the requested color scheme.
  * @returns {object} - An object in JSON format containing the intervals with colors.
  */
-export function groupIntoIntervalsWithColorsAscending (data, colorSchemeId) {
+export function getAscendingIntervalsWithColors (data, colorSchemeId) {
   try {
     const intervalCreator = new IntervalCreator(data)
     const intervals = intervalCreator.getIntervals()
@@ -96,7 +96,7 @@ export function groupIntoIntervalsWithColorsAscending (data, colorSchemeId) {
  * @param {number} colorSchemeId - The id of the requested color scheme.
  * @returns {object} - An object in JSON format containing the intervals with colors.
  */
-export function groupIntoIntervalsWithColorsDescending (data, colorSchemeId) {
+export function getDescendingIntervalsWithColors (data, colorSchemeId) {
   try {
     const intervalCreator = new IntervalCreator(data, false)
     const intervals = intervalCreator.getIntervals()

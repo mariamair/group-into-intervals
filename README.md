@@ -28,7 +28,7 @@ The module takes an array of numbers and groups them into intervals. The output 
 ### Code examples
 Requesting ascending intervals with color scheme #1: 
 ```js
-import { groupIntoIntervalsWithColorsAscending } from '../group-into-intervals/src/index.js'
+import { getAscendingIntervalsWithColors } from '../group-into-intervals/src/index.js'
 
 const colorSchemeId = 1
 const input = [1, 3, -5, 17, 3]
@@ -86,11 +86,11 @@ getColorScheme(colorSchemeId)
 ### Get intervals (without colors)
 Get ascending intervals of your data:
 ```js
-groupIntoIntervalsAscending(data)
+getAscendingIntervals(data)
 ```
 Get descending intervals of your data:
 ```js
-groupIntoIntervalsDescending(data)
+getDescendingIntervals(data)
 ```
 
 ### Get intervals (with colors)
@@ -99,12 +99,12 @@ _Please note: If your data results in more than 9 intervals, the created colors 
 
 Get ascending intervals with colors:
 ```js
-groupIntoIntervalsWithColorsAscending(data, colorSchemeId)
+getAscendingIntervalsWithColors(data, colorSchemeId)
 ```
 
 Get descending intervals with colors:
 ```js
-groupIntoIntervalsWithColorsDescending(data, colorSchemeId)
+getDescendingIntervalsWithColors(data, colorSchemeId)
 ```
 ### Get interval metadata
 Returns the metadata that will be used when your data is grouped into intervals, e.g. range, number of intervals and interval width.   
