@@ -2,10 +2,8 @@
  * This module contains methods to validate the data input.
  * 
  * @author Maria Mair <mm225mz@student.lnu.se>
- * @version 0.0.1
+ * @version 1.0.0
  */
-
-import { ColorSelector } from './ColorSelector.js'
 
 export class DataValidator {
 
@@ -25,17 +23,8 @@ export class DataValidator {
     return typeof dataToValidate[0]
   }
 
-  isValidColorScheme (colorSchemeId) {
-    const colorSelector = new ColorSelector()
-    const colorSchemes = colorSelector.getAllColorSchemes()
-    let validId = false
-    for (const scheme of colorSchemes) {
-      if (scheme.id === colorSchemeId) {
-        validId = true
-      }
-    }
-
-    if (!validId) {
+  isValidColorScheme (colorSchemeIds, id) {
+    if (!colorSchemeIds.includes(id)) {
       throw new Error ('Not a valid color scheme')
     }
   }

@@ -2,7 +2,7 @@
  * This class contains the color schemes.
  * 
  * @author Maria Mair <mm225mz@student.lnu.se>
- * @version 0.0.1
+ * @version 1.0.0
  */
 
 import { DataValidator } from './DataValidator.js'
@@ -43,9 +43,27 @@ export class ColorSelector {
    * @returns {object} - An object specifying the color scheme.
    */
   getColorScheme (id) {
-    const dataValidator = new DataValidator()
-    dataValidator.isValidColorScheme(id)
+    this.#validateId(id)
 
     return this.#colorSchemes[id - 1]
+  }
+
+  /**
+   * Validate the color scheme id.
+   *
+   * @param {number} id - The color scheme id.
+   */
+  #validateId (id) {
+    const dataValidator = new DataValidator()
+    dataValidator.isValidColorScheme(this.#getColorSchemeIds(), id)
+  }
+
+  /**
+   * Get the ids of all color schemes.
+   *
+   * @returns {number[]} - An array containing the ids.
+   */
+  #getColorSchemeIds () {
+    return this.#colorSchemes.map((element) => element.id)
   }
 }
