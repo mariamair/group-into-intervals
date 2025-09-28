@@ -9,8 +9,8 @@ Please be sure to read the contribution guidelines before making a change.
 ## Working with the code
 1. Create a new feature branch for every issue.
 2. Run `git pull` regularly to be sure you are working on the latest version.
-3. When you are done coding, commit your changes and add a commit message.
-4. Run `git pull` once more, before you run the tests.
+3. Use `git add` and `git commit` with clear commit messages to track your changes.
+4. When you are done coding the feature, run `git pull`, before you run the tests.
 5. When all tests are green, run `git push`.
 6. Create a pull request.
 
@@ -24,7 +24,7 @@ The test project contains all unit tests as well as functionality to create mark
 Be sure to run the unit tests before you create a pull request.
 
 ## Code style and linting
-ESLint with recommended settings is used to improve code quality and consistency.
+ESLint with recommended and stylistic settings is used to improve code quality and consistency.
 
 ## Requesting a change (Adding an issue)
 When you add an issue, please include the following information:
