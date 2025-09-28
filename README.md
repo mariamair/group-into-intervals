@@ -129,18 +129,18 @@ getIntervalMetadata(data, isAscending)
 The module was developed with and tested for Node version 24.1.0.
 
 ## Test report summary
-For a summary of the latest unit test run, see [the summary of test results](https://github.com/mariamair/test-group-into-intervals/blob/main/reports/summary.md).
+For a summary of the latest unit test run, see the [summary of test results](./test/reports/summary.md).
 
-For more information about the tests, see [the test report](./docs/testreport.md).
+For detailed information about the tests, see the [test report](./test/reports/report.md).
 
 ## Versions and releases
 Version 1.0.0, released 2025-09-30.
 
 ## Bugs and issues
-If you find any vulnerabilities, bugs or issues, please add them as an issue.
+If you find any vulnerabilities, bugs or issues, please add them as an [issue](./CONTRIBUTING.md#requesting-a-change-adding-an-issue).
 
 ## License
 [MIT License](LICENSE)
 
 ## Contributing
-Interested in contributing to this module? Please see [the contribution guidelines](CONTRIBUTING.md).
+Interested in contributing to this module? Please see the [contribution guidelines](CONTRIBUTING.md).

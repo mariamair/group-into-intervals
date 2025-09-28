@@ -7,7 +7,7 @@ export default defineConfig([
     plugins: { js },
     extends: ['js/recommended'],
     rules: {
-      'brace-style': ['error', '1tbs'],
+      'brace-style': ['error', '1tbs', { 'allowSingleLine': true }],
       camelcase: ['error', { properties: 'always' }],
       'eol-last': ['error', 'always'],
       indent: ['error', 2],
