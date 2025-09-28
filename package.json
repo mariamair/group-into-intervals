@@ -11,7 +11,7 @@
   "author": "Maria Mair <mm225mz@student.lnu.se>",
   "repository": "https://github.com/mariamair/group-into-intervals",
   "license": "MIT",
-  "main": "index.js",
+  "main": "./src/index.js",
   "scripts": {
     "lint": "npx eslint ./src",
     "lint:fix": "npx eslint ./src --fix",
