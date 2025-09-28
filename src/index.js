@@ -2,7 +2,7 @@
  * The main starting point of the module.
  *
  * @author Maria Mair <mm225mz@student.lnu.se>
- * @version 0.0.1
+ * @version 1.0.0
  */
 
 import { ColorSelector } from './ColorSelector.js'

@@ -2,7 +2,7 @@
  * This class contains methods to match colors to the data input.
  * 
  * @author Maria Mair <mm225mz@student.lnu.se>
- * @version 0.0.1
+ * @version 1.0.0
  */
 
 import { ColorConverter } from './ColorConverter.js'

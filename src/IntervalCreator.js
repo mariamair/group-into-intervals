@@ -2,7 +2,7 @@
  * This class contains methods to process the data input and group the data into intervals.
  * 
  * @author Maria Mair <mm225mz@student.lnu.se>
- * @version 0.0.1
+ * @version 1.0.0
  */
 
 import { DataValidator } from './DataValidator.js'

@@ -2,7 +2,7 @@
  * This class contains methods to calculate new colors from existing ones.
  * 
  * @author Maria Mair <mm225mz@student.lnu.se>
- * @version 0.0.1
+ * @version 1.0.0
  */
 
 export class ColorCreator {
