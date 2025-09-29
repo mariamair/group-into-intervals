@@ -29,7 +29,7 @@ export class ColorConverter {
   convertMultipleRgbStringsToArray (rgbValueStrings) {
     const rgbArray = []
 
-    for(const rgbValueString of rgbValueStrings) {
+    for (const rgbValueString of rgbValueStrings) {
       rgbArray.push(this.convertRgbStringToArray(rgbValueString))
     }
 

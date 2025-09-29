@@ -115,7 +115,7 @@ export function getDescendingIntervalsWithColors (data, colorSchemeId) {
  *
  * @param {number[]} data - An array of numbers
  * @param {boolean} isAscending - True for ascending, false for descending sorting.
- * @returns {object} - An object in JSon format containing the metadata.
+ * @returns {object} - An object in JSON format containing the metadata.
  */
 export function getIntervalMetadata (data, isAscending) {
   try {
