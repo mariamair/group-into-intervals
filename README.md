@@ -24,7 +24,7 @@ The module takes an array of numbers and groups them into intervals. The output 
 ### Code examples
 Requesting ascending intervals with color scheme #1: 
 ```js
-import { getAscendingIntervalsWithColors } from '../group-into-intervals/src/index.js'
+import { getAscendingIntervalsWithColors } from 'group-into-intervals'
 
 const colorSchemeId = 1
 const input = [1, 3, -5, 17, 3]
