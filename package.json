@@ -9,7 +9,10 @@
   ],
   "type": "module",
   "author": "Maria Mair <mm225mz@student.lnu.se>",
-  "repository": "https://github.com/mariamair/group-into-intervals",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mariamair/group-into-intervals.git"
+  },
   "license": "MIT",
   "main": "./src/index.js",
   "scripts": {
