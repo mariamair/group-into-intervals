@@ -1,13 +1,13 @@
 # Test results
-**Latest run:** Sun Sep 28 2025 21:54
+**Latest run:** Mon Sep 29 2025 12:27
 
-## Display color schemes
+## Validate input array
 
 | Test | Status |
 |------|--------|
-| should return all color schemes (as JSON) | ✅ |
-| should contain at least one color scheme object (as JSON) | ✅ |
-| should return selected color scheme (as JSON) | ✅ |
+| should be array | ✅ |
+| should not be mixed array | ✅ |
+| should be array of numbers | ✅ |
 
 
 ## Group input data into intervals
@@ -26,10 +26,10 @@
 | should return correct metadata (as JSON) | ✅ |
 
 
-## Validate input array
+## Display color schemes
 
 | Test | Status |
 |------|--------|
-| should be array | ✅ |
-| should not be mixed array | ✅ |
-| should be array of numbers | ✅ |
+| should return all color schemes (as JSON) | ✅ |
+| should contain at least one color scheme object (as JSON) | ✅ |
+| should return selected color scheme (as JSON) | ✅ |

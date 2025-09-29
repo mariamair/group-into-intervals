@@ -14,13 +14,9 @@ For more information about Sturges' rule and criticism of it, see [Wikipedia](ht
 ## Installation
 To add the module to your application, run:
 ```
-git submodule add https://github.com/mariamair/group-into-intervals
+npm install group-into-intervals
 ```
 
-To get the latest update of the module, run:
-```
-git submodule update --remote
-```
 
 ## Usage
 The module takes an array of numbers and groups them into intervals. The output is returned as JSON.
@@ -134,7 +130,7 @@ For a summary of the latest unit test run, see the [summary of test results](./t
 For detailed information about the tests, see the [test report](./test/reports/report.md).
 
 ## Versions and releases
-Version 1.0.0, released 2025-09-30.
+Version 1.0.0, released 2025-09-29.
 
 ## Bugs and issues
 If you find any vulnerabilities, bugs or issues, please add them as an [issue](./CONTRIBUTING.md#requesting-a-change-adding-an-issue).
