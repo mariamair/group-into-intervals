@@ -2,7 +2,7 @@
  * This class contains methods to calculate new colors from existing ones.
  * 
  * @author Maria Mair <mm225mz@student.lnu.se>
- * @version 1.0.0
+ * @version 1.1.0
  */
 
 export class ColorCreator {
@@ -15,7 +15,7 @@ export class ColorCreator {
    * @param {number} numberOfIntervals - The number of intervals.
    * @returns {number[]} - An array specifying RGB color values.
    */
-  getColors (colors, numberOfIntervals) {
+  getColors(colors, numberOfIntervals) {
     this.#setStartingColors(colors)
     while (this.#hasMoreIntervalsThanColors(numberOfIntervals)){
       this.#createColors()
@@ -26,17 +26,17 @@ export class ColorCreator {
   /** 
    * Set received color scheme colors as starting colors.
    */
-  #setStartingColors (colors) {
+  #setStartingColors(colors) {
     this.#colors = colors
   }
 
   /**
-   * Check if there are more interval than colors.
+   * Check if there are more intervals than colors.
    *
    * @param {number} numberOfIntervals - The number of intervals.
    * @returns {boolean} - True if there are more intervals than colors, false otherwise.
    */
-  #hasMoreIntervalsThanColors (numberOfIntervals) {
+  #hasMoreIntervalsThanColors(numberOfIntervals) {
     if (numberOfIntervals > this.#colors.length) {
       return true
     }
@@ -44,11 +44,11 @@ export class ColorCreator {
   }
 
   /**
-   * Create color pairs from the existing colors.
+   * Create color pairs from the existing colors, pairing each color with the subsequent one in the array.
    *
    * @returns {number[][]} An array containing pairs of RGB value arrays.
    */
-  #createColorPairs () {
+  #createColorPairs() {
     const colorPairs = []
     for (let i = 0, j = 1; i < this.#colors.length - 1; i++, j++) {
       colorPairs.push([this.#colors[i], this.#colors[j]])
@@ -59,15 +59,14 @@ export class ColorCreator {
   /**
    * Create new colors from the existing ones.
    */
-  #createColors () {
+  #createColors() {
     const colorList = []
     const colorPairs = this.#createColorPairs()
 
     let index = 0
     for (const colorPair of colorPairs) {
       colorList.push(colorPair[0])
-      const newColor = this.#calculateMiddleRgbValue(colorPair)
-      colorList.push(newColor)
+      colorList.push(this.#calculateNewColor(colorPair))
       // For the last pair add the second color as well
       if (index === colorPairs.length - 1) {
         colorList.push(colorPair[1])
@@ -83,7 +82,7 @@ export class ColorCreator {
    * @param {number[][]} colorPair - An array containing two arrays of RGB values.
    * @returns {number[]} - An array containing a new RGB value.
    */
-  #calculateMiddleRgbValue (colorPair) {
+  #calculateNewColor(colorPair) {
     const middleRgbValue = []
     for (let i = 0; i < 3; i++) {
       const newValue = Math.round(colorPair[0][i] - (colorPair[0][i] - colorPair[1][i]) / 2)

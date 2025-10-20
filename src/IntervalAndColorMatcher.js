@@ -2,7 +2,7 @@
  * This class contains methods to match colors to the data input.
  * 
  * @author Maria Mair <mm225mz@student.lnu.se>
- * @version 1.0.0
+ * @version 1.1.0
  */
 
 import { ColorConverter } from './ColorConverter.js'
@@ -15,7 +15,7 @@ export class IntervalAndColorMatcher {
   #numberOfIntervals
   #selectedColors
 
-  constructor (intervals, colorSchemeId) {
+  constructor(intervals, colorSchemeId) {
     const selectedScheme = this.#getSelectedColorScheme(colorSchemeId)
     this.#selectedColors = this.#colorConverter.convertMultipleRgbStringsToArray(selectedScheme.rgbValues)
     this.#intervals = intervals
@@ -28,7 +28,7 @@ export class IntervalAndColorMatcher {
    * @param {number} id - The color scheme id.
    * @returns {object} - An object specifying the color scheme.
    */
-  #getSelectedColorScheme (id) {
+  #getSelectedColorScheme(id) {
     const colorSelector = new ColorSelector()
     return colorSelector.getColorScheme(id)
   }
@@ -38,7 +38,7 @@ export class IntervalAndColorMatcher {
    *
    * @returns {number[]} - An array containing one color for each interval.
    */
-  #getColorsForIntervals () {
+  #getColorsForIntervals() {
     const colorCreator = new ColorCreator()
     return colorCreator.getColors(this.#selectedColors, this.#numberOfIntervals)
   }
@@ -48,7 +48,7 @@ export class IntervalAndColorMatcher {
    *
    * @returns {object} - The interval object expanded with colors. 
    */
-  addColorToIntervals () {
+  addColorToIntervals() {
     const colorList = this.#getColorsForIntervals()
 
     for (let i = 0; i < this.#intervals.length; i++) {
