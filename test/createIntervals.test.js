@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-/* eslint-disable max-len */
 /* eslint-disable no-sparse-arrays */
 import { getAscendingIntervals, getDescendingIntervals, getAscendingIntervalsWithColors, getDescendingIntervalsWithColors, getIntervalMetadata } from '../src/index.js'
 
