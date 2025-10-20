@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import { IntervalCreator } from '../src/IntervalCreator'
 
 const noArray = 13

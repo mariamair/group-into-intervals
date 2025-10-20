@@ -1,4 +1,5 @@
 import js from '@eslint/js'
+import globals from 'globals'
 import { defineConfig } from 'eslint/config'
 
 export default defineConfig([
@@ -22,6 +23,11 @@ export default defineConfig([
       'max-params': ['warn', { 'max': 3 }],
       'object-curly-spacing': ['error', 'always'],
       quotes: ['error', 'single']
+    },
+    languageOptions: {
+      globals: {
+        ...globals.jest
+      }
     }
   }
 ])

@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import { getAllColorSchemes, getColorScheme } from '../src/index.js'
 
 const colorSchemeId = 3
