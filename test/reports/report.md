@@ -1,14 +1,5 @@
 # Test results
-**Latest run:** Mon Oct 20 2025 20:48
-
-## Validate input array
-
-| Test | Status |
-|------|--------|
-| should be array | ✅ |
-| should not be mixed array | ✅ |
-| should be array of numbers | ✅ |
-
+**Latest run:** Mon Oct 20 2025 23:05
 
 ## Display color schemes
 
@@ -17,6 +8,15 @@
 | should return all color schemes (as JSON) | ✅ |
 | should contain at least one color scheme object (as JSON) | ✅ |
 | should return selected color scheme (as JSON) | ✅ |
+
+
+## Validate input array
+
+| Test | Status |
+|------|--------|
+| should be array | ✅ |
+| should not be mixed array | ✅ |
+| should be array of numbers | ✅ |
 
 
 ## Group input data into intervals

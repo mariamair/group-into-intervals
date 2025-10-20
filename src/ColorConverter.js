@@ -2,7 +2,7 @@
  * This class contains methods to convert between hexadecimal and rgb color values.
  * 
  * @author Maria Mair <mm225mz@student.lnu.se>
- * @version 1.0.0
+ * @version 1.1.0
  */
 
 export class ColorConverter {
@@ -13,7 +13,7 @@ export class ColorConverter {
    * @param {string} rgbValueString - An RGB string specifying a color.
    * @returns {number[]} - An array with numbers representing the RGB values of a color.
    */
-  convertRgbStringToArray (rgbValueString) {
+  convertRgbStringToArray(rgbValueString) {
     const separator = /[(),]/
     const convertToInt = (element) => Number.parseInt(element)
 
@@ -26,7 +26,7 @@ export class ColorConverter {
    * @param {string[]} rgbValueStrings - An array containing multiple RGB value strings.
    * @returns {number{}} - An array containing arrays with numbers representing RGB values.
    */
-  convertMultipleRgbStringsToArray (rgbValueStrings) {
+  convertMultipleRgbStringsToArray(rgbValueStrings) {
     const rgbArray = []
 
     for (const rgbValueString of rgbValueStrings) {
@@ -42,7 +42,7 @@ export class ColorConverter {
    * @param {number[]} rgbValueArray - Array with numbers representing RGB values.
    * @returns {string} - An RGB string specifying a color.
    */
-  convertRgbArrayToString (rgbValueArray) {
+  convertRgbArrayToString(rgbValueArray) {
     return 'rgb(' + rgbValueArray[0] + ', ' + rgbValueArray[1] + ', ' + rgbValueArray[2] + ')'
   }
 
@@ -52,7 +52,9 @@ export class ColorConverter {
    * @param {number[]} rgbValueArray - Array with numbers representing RGB values.
    * @returns {string} - A hexadecimal string specifying a color.
    */
-  convertRgbArraytoHexValue (rgbValueArray) {
-    return '#' + rgbValueArray[0].toString(16).padStart(2, '0') + rgbValueArray[1].toString(16).padStart(2, '0') + rgbValueArray[2].toString(16).padStart(2, '0')
+  convertRgbArraytoHexValue(rgbValueArray) {
+    return '#' + rgbValueArray[0].toString(16).padStart(2, '0') 
+      + rgbValueArray[1].toString(16).padStart(2, '0') 
+      + rgbValueArray[2].toString(16).padStart(2, '0')
   }
 }
