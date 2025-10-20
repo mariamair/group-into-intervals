@@ -2,10 +2,8 @@
  * This class contains the color schemes.
  * 
  * @author Maria Mair <mm225mz@student.lnu.se>
- * @version 1.0.0
+ * @version 1.1.0
  */
-
-import { DataValidator } from './DataValidator.js'
 
 export class ColorSelector {
   #colorSchemes = [ 
@@ -32,7 +30,7 @@ export class ColorSelector {
    * 
    * @returns {object[]} - An array containing all color scheme objects.
    */
-  getAllColorSchemes () {
+  getAllColorSchemes() {
     return this.#colorSchemes
   }
 
@@ -42,10 +40,10 @@ export class ColorSelector {
    * @param {number} id - A color scheme id.
    * @returns {object} - An object specifying the color scheme.
    */
-  getColorScheme (id) {
+  getColorScheme(id) {
     this.#validateId(id)
-
-    return this.#colorSchemes[id - 1]
+    const colorSchemeArray = this.#colorSchemes.filter((element) => element.id === id)
+    return colorSchemeArray[0]
   }
 
   /**
@@ -53,9 +51,11 @@ export class ColorSelector {
    *
    * @param {number} id - The color scheme id.
    */
-  #validateId (id) {
-    const dataValidator = new DataValidator()
-    dataValidator.isValidColorScheme(this.#getColorSchemeIds(), id)
+  #validateId(id) {
+    const colorSchemeIds = this.#getColorSchemeIds()
+    if (!colorSchemeIds.includes(id)) {
+      throw new Error ('Not a valid color scheme')
+    }
   }
 
   /**
@@ -63,7 +63,7 @@ export class ColorSelector {
    *
    * @returns {number[]} - An array containing the ids.
    */
-  #getColorSchemeIds () {
+  #getColorSchemeIds() {
     return this.#colorSchemes.map((element) => element.id)
   }
 }
